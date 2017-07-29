@@ -1,5 +1,13 @@
+# Travis CI configuerd to build java 8 project using gradle.
+# https://travis-ci.org/
 language: java
 
 jdk:
-    - oraclejdk8
+  - oraclejdk8
 
+notifications:
+  email:
+    recipients:
+      - dzafar.sadik@gmail.com
+    on_success: never
+    on_failure: always
