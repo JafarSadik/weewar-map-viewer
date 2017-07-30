@@ -11,3 +11,6 @@ notifications:
       - dzafar.sadik@gmail.com
     on_success: never
     on_failure: always
+
+before_install:
+  - chmod +x gradlew
