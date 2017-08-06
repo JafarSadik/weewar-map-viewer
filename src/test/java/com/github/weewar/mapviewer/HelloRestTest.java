@@ -29,6 +29,6 @@ public class HelloRestTest {
     public void checkHelloResponse() {
         when(helloControllerMock.hello()).thenReturn("Hello world :D");
         assertThat(restTemplate.getForObject("http://localhost:" + port + "/", String.class))
-                .startsWith("_Hello world :D");
+                .startsWith("Hello world :D");
     }
 }
