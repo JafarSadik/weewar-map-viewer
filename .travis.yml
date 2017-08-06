@@ -5,12 +5,24 @@ language: java
 jdk:
   - oraclejdk8
 
+before_install:
+  - chmod +x gradlew
+
+install: []
+
+script: ./gradlew build
+
+cache:
+  directories:
+    - ~/.gradle/caches/
+    - ~/.gradle/wrapper/
+
+dist: trusty
+sudo: required
+
 notifications:
   email:
     recipients:
       - dzafar.sadik@gmail.com
     on_success: never
     on_failure: always
-
-before_install:
-  - chmod +x gradlew

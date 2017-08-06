@@ -1,9 +1,9 @@
 # Auto detect text files and perform LF normalization
 * text=auto
 
-*.java  text diff=java
+*.java text diff=java
 *.htm text diff=html
-*.html	text diff=html
+*.html text diff=html
 *.css text diff=css
 *.js text
 *.sql text
