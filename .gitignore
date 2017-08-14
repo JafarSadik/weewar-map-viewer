@@ -16,6 +16,9 @@ classes/
 .gradle/
 !gradle-wrapper.jar
 
+#vagant
+.vagrant
+
 # log files
 logs/
 *.log

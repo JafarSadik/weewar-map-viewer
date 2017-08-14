@@ -1,6 +1,9 @@
-# Travis CI configuerd to build java 8 project using gradle.
+# Travis CI configured to build java 8 project using gradle.
 # https://travis-ci.org/
 language: java
+
+dist: trusty
+sudo: required
 
 jdk:
   - oraclejdk8
@@ -12,17 +15,18 @@ install: []
 
 script: ./gradlew build
 
+before_cache:
+  - rm -f  ~/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr ~/.gradle/caches/*/plugin-resolution/
+
 cache:
   directories:
     - ~/.gradle/caches/
     - ~/.gradle/wrapper/
 
-dist: trusty
-sudo: required
-
 notifications:
   email:
     recipients:
       - dzafar.sadik@gmail.com
-    on_success: never
+    on_success: change
     on_failure: always
