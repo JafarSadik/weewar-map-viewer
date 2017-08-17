@@ -17,6 +17,34 @@ Vagrant.configure("2") do |config|
     # Create a private network, which allows host-only access to the machine using a specific IP address.
     config.vm.network "private_network", ip: "192.168.33.101"
 
+    # Configure 'vagrant-hostmanager' plugin or display warning message and instructions.
+    # The plugin will manage system host file so that we can use http://weewarmaps.com instead of box ip address.
+    if Vagrant.has_plugin?("vagrant-hostmanager")
+        config.vm.hostname = 'weewarmaps.com'
+        config.hostmanager.enabled = true
+        config.hostmanager.manage_host = true
+        config.hostmanager.manage_guest = false
+        config.hostmanager.ignore_private_ip = false
+        config.hostmanager.include_offline = true
+    else
+        warn <<-HOST_MANAGER_NOT_INSTALLED
+        WARNING!
+        Plugin vagrant-hostmanager is not installed. It's goal is to manage host files on host and guest machines.
+
+        Install the plugin:
+        vagrant plugin install vagrant-hostmanager
+
+        Alternatively, manually add the following line to the system host file:
+        192.168.33.101  weewarmaps.com
+
+        linux, mac: /etc/hosts
+        windows:    C:\Windows\System32\drivers\etc
+
+        Plugin site: https://github.com/devopsgroup-io/vagrant-hostmanager
+
+        HOST_MANAGER_NOT_INSTALLED
+   end
+
     # Enable provisioning with a shell script. Additional provisioners such as
     # Puppet, Chef, Ansible, Salt, and Docker are also available.
     config.vm.provision "shell", inline: <<-SHELL
