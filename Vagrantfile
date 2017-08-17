@@ -6,19 +6,16 @@ Vagrant.configure("2") do |config|
     config.vm.box = "ubuntu/trusty64"
     config.vm.box_check_update = true
 
+    # VirtualBox specific configuration
     config.vm.provider "virtualbox" do |vb|
-        # Customize the amount of memory on the VM:
-        vb.memory = "4000"
+        vb.memory = "4000" #MB
     end
 
     # Expose configuration for all services under /config
     config.vm.synced_folder "config/", "/config/"
 
-    # Create a forwarded port mapping which allows access to a specific port
-    # within the machine from a port on the host machine.
-    config.vm.network "forwarded_port", guest: 8080, host: 80       # nginx
-    config.vm.network "forwarded_port", guest: 9200, host: 9200     # elastic search
-    config.vm.network "forwarded_port", guest: 27017, host: 27017   # mongodb
+    # Create a private network, which allows host-only access to the machine using a specific IP address.
+    config.vm.network "private_network", ip: "192.168.33.101"
 
     # Enable provisioning with a shell script. Additional provisioners such as
     # Puppet, Chef, Ansible, Salt, and Docker are also available.
