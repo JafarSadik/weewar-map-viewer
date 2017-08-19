@@ -48,10 +48,10 @@ Vagrant.configure("2") do |config|
 
     # Enable provisioning with shell scripts.
     [   "install_scripts/java.sh",
+        "install_scripts/utilities.sh",
         "install_scripts/elasticsearch.sh",
         "install_scripts/mongodb.sh",
-        "install_scripts/nginx.sh",
-        "install_scripts/utilities.sh"
+        "install_scripts/nginx.sh"
     ].each do |script_path|
         config.vm.provision "shell", path: script_path
     end
