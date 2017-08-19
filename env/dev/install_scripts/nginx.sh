@@ -8,7 +8,7 @@ function update_configuration() {
 # install nginx, see https://www.nginx.com/resources/wiki/start/topics/tutorials/install/
 if [ ! -d "/etc/nginx" ]; then
     echo "Installing nginx service"
-    apt-get --yes install nginx
+    apt-get --yes --force-yes install nginx
     update_configuration
 else
     echo "Updating nginx configuration"

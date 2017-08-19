@@ -18,7 +18,7 @@
 ##
 
 server {
-    server_name weewarmaps.com;
+    server_name maps.weewar.com;
 
     listen 80 default_server;
     listen [::]:80 default_server ipv6only=on;
