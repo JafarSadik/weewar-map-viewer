@@ -1,6 +1,5 @@
-# Auto detect text files and perform LF normalization
+# text files
 * text=auto
-
 *.java text diff=java
 *.htm text diff=html
 *.html text diff=html
@@ -26,14 +25,7 @@
 *.gitattributes text
 *.project text
 
-# Files that always end with LF
-*.sh eol=lf
-
-# Files that always end with CRLF
-*.bat eol=crlf
-*.cmd eol=crlf
-
-# Binary files
+# binary files
 *.png binary
 *.jpg binary
 *.jpeg binary
@@ -48,3 +40,8 @@
 *.zip binary
 *.7z binary
 
+# enforce proper line endings
+*.sh eol=lf
+**/etc eol=lf
+*.bat eol=crlf
+*.cmd eol=crlf

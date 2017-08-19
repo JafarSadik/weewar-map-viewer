@@ -4,15 +4,15 @@
 Vagrant.configure("2") do |config|
     # Box configuration
     config.vm.box = "ubuntu/trusty64"
-    config.vm.box_check_update = true
+    config.vm.box_check_update = false
 
     # VirtualBox specific configuration
     config.vm.provider "virtualbox" do |vb|
-        vb.memory = "4000" #MB
+        vb.memory = 4000 #MB
     end
 
-    # Expose configuration for all services under /config
-    config.vm.synced_folder "config/", "/config/"
+    # Expose box configuration
+    config.vm.synced_folder ".", "/box_config/"
 
     # Create a private network, which allows host-only access to the machine using a specific IP address.
     config.vm.network "private_network", ip: "192.168.33.101"
@@ -57,7 +57,7 @@ Vagrant.configure("2") do |config|
         ELASTIC_SEARCH=elasticsearch-5.5.1.deb
         wget -q https://artifacts.elastic.co/downloads/elasticsearch/$ELASTIC_SEARCH
         dpkg -i $ELASTIC_SEARCH
-        cp -fr /config/elasticsearch/* /etc/elasticsearch/
+        cp -fr /box_config/etc/elasticsearch/* /etc/elasticsearch/
         service elasticsearch start
         update-rc.d elasticsearch defaults
         rm -f $ELASTIC_SEARCH
@@ -67,12 +67,12 @@ Vagrant.configure("2") do |config|
         echo "deb [ arch=amd64 ] http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.4 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-3.4.list
         apt-get update
         apt-get install --yes mongodb-org
-        cp -f /config/mongod.conf /etc/mongod.conf
+        cp -f /box_config/etc/mongod.conf /etc/mongod.conf
         service mongod restart
 
         # install nginx, see https://www.nginx.com/resources/wiki/start/topics/tutorials/install/
         apt-get --yes install nginx
-        cp -fr /config/nginx/* /etc/nginx
+        cp -fr /box_config/etc/nginx/* /etc/nginx
         service nginx reload
 
         # install utilities
