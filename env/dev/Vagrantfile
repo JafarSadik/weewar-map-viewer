@@ -47,12 +47,7 @@ Vagrant.configure("2") do |config|
    end
 
     # Enable provisioning with shell scripts.
-    [   "install_scripts/java.sh",
-        "install_scripts/utilities.sh",
-        "install_scripts/elasticsearch.sh",
-        "install_scripts/mongodb.sh",
-        "install_scripts/nginx.sh"
-    ].each do |script_path|
-        config.vm.provision "shell", path: script_path
+    %w[java utilities elasticsearch mongodb nginx].each do |script|
+        config.vm.provision "shell", path: "install_scripts/#{script}.sh"
     end
 end
