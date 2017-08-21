@@ -15,6 +15,14 @@ install: []
 
 script: ./gradlew build
 
+deploy:
+  provider: heroku
+  app: weemaps
+  api_key:
+    secure: "i9ojKNescx/2AK9eUIQ3Y7zKkb3zPSAJn7ba4yKEzVRONEhVFxPFOnkhiMV0VMDTov6Te8ArtJ1wFvVCrATlqdSp076sns+Kvy7EC5z/ykeNsz6jhW3DSKzogAojZ0DbT6d/fIxP6r0z5axqh8hSXzMFyyD7CFAOIXFejNGmviv2Gyfccm+muBFmCmyiAZKVFQsIh56uTkRbfSfrma/2k2bQR10UWn9X/o3oBnvbetSoNO3KU/WKc8Vcw5q1u9iouj1dInQ/XsXGr3sOjKnBSNxl63qPKUUw53Q2MHWAfQtYsLfYM/vpvglMc9BQlIlBrTNp8PDIZ+XAs8SsFU/MebhSBql2yIigVOObss6YpWMaAPTomKTL09Ja2oTuAC9cNOzPELq3xoCZ1OgIKdcKl2hHHRnwfnxt4otGgroBtHW+eAC95vhuHm1kJi1TKXXvYWeeF8p4JBAtyAsuP5/UegN6LTjQOPT5B4WMGwl0gRaW2ZZic9i+b1TCUk8aFTTK2DrzmbSBW2id9MHf2NtT0z8c2hYm4f0ovP4HEM6ZSzkX1KpUxkvbwweRIEFyqumbZ7vK7fQs6Kfw68dR2kYQsy6OiUjFXLgQK/c9MS321+pQ8Cfxko27Ok9ybAdjgHab0DQqstNwEgBNaYJmgru1Flw2Vu8Aza6r103Cy4Z3DsE="
+  on:
+    branch: master
+
 before_cache:
   - rm -f  ~/.gradle/caches/modules-2/modules-2.lock
   - rm -fr ~/.gradle/caches/*/plugin-resolution/
