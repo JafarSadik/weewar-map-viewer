@@ -1,4 +1,4 @@
-# ignore decompressed archive and converted map directory
+# ignore decompressed archive and target directory
 weewar-maps/
 weewar-maps-json/
 
