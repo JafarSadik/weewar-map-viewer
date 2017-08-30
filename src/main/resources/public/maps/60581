@@ -1,0 +1,1 @@
+{"id":"60581","name":"intresting","creator":"117sparta","initialCredits":200,"perBaseCredits":100,"width":3,"height":2,"players":2,"revision":1,"terrain":[{"x":"0","y":"0","type":"Plains"},{"x":"0","y":"1","type":"Base","startFaction":"1"},{"x":"1","y":"0","type":"Base","startFaction":"0"},{"x":"1","y":"1","type":"Plains"}]}
