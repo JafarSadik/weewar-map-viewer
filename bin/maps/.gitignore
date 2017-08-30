@@ -1,0 +1,4 @@
+# ignore decompressed archive and converted map directory
+weewar-maps/
+weewar-maps-json/
+

@@ -1,9 +1,10 @@
-from threading import Thread
 import os
 import urllib2
+from threading import Thread
 
 MAX_MAP_ID = 500000
 WORKER_THREADS = 50
+
 
 # -------------------------------------------
 # Script downloads all available weewar maps 
@@ -15,7 +16,7 @@ def main():
 
     # download maps in separate threads
     for thread_no in range(0, WORKER_THREADS):
-        Thread(target=worker, args=(thread_no, )).start()
+        Thread(target=worker, args=(thread_no,)).start()
 
 
 def worker(thread_no):
