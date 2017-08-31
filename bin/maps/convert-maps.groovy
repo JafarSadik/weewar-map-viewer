@@ -55,7 +55,7 @@ mapsArchive.entries().findAll { !it.isDirectory() }.each { ZipEntry zipEntry ->
 
             // Copy map details: id, name, creator, size, ...
             def dstMap = [
-                    id            : srcMap.@id,
+                    id            : srcMap.@id as Integer,
                     name          : srcMap.name.text(),
                     creator       : srcMap.creator.text(),
                     initialCredits: srcMap.initialCredits.text() as Integer,
@@ -93,13 +93,13 @@ mapsArchive.entries().findAll { !it.isDirectory() }.each { ZipEntry zipEntry ->
             srcMap.terrains.terrain.each {
                 //add tile, omit null values
                 dstMap.terrain << [
-                        x           : it.@x,
-                        y           : it.@y,
+                        x           : it.@x as Integer,
+                        y           : it.@y as Integer,
                         type        : it.@type,
-                        startFaction: it.@startFaction,
+                        startFaction: it.@startFaction as Integer,
                         direction   : it.@direction,
                         unit        : it.@startUnit,
-                        unitOwner   : it.@startUnitOwner
+                        unitOwner   : it.@startUnitOwner as Integer
                 ].findAll { it.value != null }
             }
 

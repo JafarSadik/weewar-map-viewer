@@ -1,1 +1,1 @@
-{"id":"64558","name":"kinderas","creator":"headcrusher","initialCredits":200,"perBaseCredits":100,"width":3,"height":1,"players":2,"revision":1,"terrain":[{"x":"0","y":"0","type":"Plains","unit":"Trooper","unitOwner":"0"},{"x":"2","y":"0","type":"Plains","unit":"Trooper","unitOwner":"1"}]}
+{"id":64558,"name":"kinderas","creator":"headcrusher","initialCredits":200,"perBaseCredits":100,"width":3,"height":1,"players":2,"revision":1,"terrain":[{"x":0,"y":0,"type":"Plains","unit":"Trooper","unitOwner":0},{"x":2,"y":0,"type":"Plains","unit":"Trooper","unitOwner":1}]}
