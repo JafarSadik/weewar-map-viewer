@@ -1,30 +1,36 @@
-import groovy.json.JsonBuilder
-
-import java.util.zip.ZipEntry
-import java.util.zip.ZipFile
-
 // -------------------------------------------------------------
 // Script converts original weewar maps from XML to JSON format
 // -------------------------------------------------------------
 
-// Parse command line arguments and options
-def cli = new CliBuilder(usage: 'convert-maps.groovy [options] [output_dir]', header: 'Options:')
-cli.s(longOpt: 'silent', 'silent mode, no output to console', required: false)
-cli.h(longOpt: 'help', 'shows the help', required: false)
-cli.p(longOpt: 'pretty', 'convert maps to formatted json', required: false)
-cli.f(longOpt: 'force', 'force override target directory', required: false)
-def options = cli.parse(this.args), args = options.arguments()
-if (options.help || args.size() > 1) {
-    cli.usage()
-    System.exit(-1)
-}
+import groovy.json.JsonBuilder
+import java.util.zip.ZipEntry
+import java.util.zip.ZipFile
 
-// Source map archive and target directory
-def mapsArchive = new ZipFile("weewar-maps.zip")
-def targetDir = new File(args ? args[0] : "weewar-maps-json")
+// Evaluate base path in order to make script execution independent from working directory
+def script = getClass().protectionDomain.codeSource.location.path
+def baseDir = script.replaceAll("\\\\", "/").substring(0, script.lastIndexOf("/"))
+
+def importScript = { evaluate(new File(it)) }
+importScript("${baseDir}/lib/utils.groovy")
+
+// Script arguments and options
+Class.isLoaded name: 'groovy.util.CliBuilder',
+        loaded: {
+            // obtain from command linne
+            importScript("${baseDir}/lib/cli.groovy")
+        },
+        otherwise: {
+            // obtain from groovy bindings
+            options = [force: forceOverride]
+            args = [targetDir]
+        }
 
 // Modify 'println' to support silent mode
 def println = { text -> if (!options.silent) println text }
+
+// Source map archive and target directory
+def mapsArchive = new ZipFile("${baseDir}/weewar-maps.zip")
+def targetDir = new File(args ? args[0] : "${baseDir}/weewar-maps-json")
 
 // Create target directory or ask to override
 if (!options.force && targetDir.exists()) {
@@ -35,20 +41,9 @@ if (!options.force && targetDir.exists()) {
 }
 targetDir.mkdir()
 
-// Extend parser to handle parse exceptions
-XmlParser.metaClass.tryParse = { inputStream, errorHandler ->
-    try {
-        return Optional.of(delegate.parse(inputStream))
-    } catch (Throwable e) {
-        errorHandler(e)
-    }
-    Optional.empty()
-}
-
 // Converting all maps to JSON format
 def xmlParser = new XmlParser()
 println "Converting map files..."
-def startTime = System.currentTimeMillis()
 mapsArchive.entries().findAll { !it.isDirectory() }.each { ZipEntry zipEntry ->
     mapsArchive.getInputStream(zipEntry).withCloseable { inputStream ->
         // Parse XML map
@@ -56,7 +51,7 @@ mapsArchive.entries().findAll { !it.isDirectory() }.each { ZipEntry zipEntry ->
         Optional<Node> xml = xmlParser.tryParse(inputStream, errorHandler)
         xml.ifPresent { Node srcMap ->
             def mapFile = new File(targetDir.getPath() + "/" + srcMap.@id)
-            println "${zipEntry.name} -> ${mapFile.absolutePath}"
+            println "${mapsArchive.name}/${zipEntry.name} -> ${mapFile.absolutePath}"
 
             // Copy map details: id, name, creator, size, ...
             def dstMap = [
@@ -95,7 +90,6 @@ mapsArchive.entries().findAll { !it.isDirectory() }.each { ZipEntry zipEntry ->
                {x:1,y:7,type:'Woods'}
                ]
             */
-
             srcMap.terrains.terrain.each {
                 //add tile, omit null values
                 dstMap.terrain << [
@@ -116,4 +110,3 @@ mapsArchive.entries().findAll { !it.isDirectory() }.each { ZipEntry zipEntry ->
     }
 }
 mapsArchive.close()
-println "Map conversion completed in ${(System.currentTimeMillis() - startTime) / 1000} seconds"

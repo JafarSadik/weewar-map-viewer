@@ -11,7 +11,7 @@ springBoot {
 buildscript {
     repositories { mavenCentral() }
     dependencies {
-        classpath('org.springframework.boot:spring-boot-gradle-plugin:1.5.6.RELEASE')
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.5.6.RELEASE'
     }
 }
 
@@ -21,7 +21,7 @@ repositories {
 }
 
 dependencies {
-    compile('org.springframework.boot:spring-boot-starter-web:1.5.6.RELEASE') {
+    compile 'org.springframework.boot:spring-boot-starter-web:1.5.6.RELEASE', {
         exclude module: 'spring-boot-starter-tomcat'
     }
     compile 'org.springframework.boot:spring-boot-starter-jetty:1.5.6.RELEASE'
@@ -29,4 +29,19 @@ dependencies {
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-all:1.10+'
     testCompile 'org.springframework.boot:spring-boot-starter-test'
+}
+
+
+task convertMaps {
+    description = "Converts original weewar maps from XML to JSON format"
+    group = "weewar map viewer"
+    doLast {
+        def bindings = new Binding([
+                forceOverride: true,
+                targetDir    : new File("src/main/resources/public/maps").absolutePath
+        ])
+        def shell = new GroovyShell(bindings)
+        def convertMaps = new File("bin/maps/convert-maps.groovy")
+        shell.run(convertMaps)
+    }
 }
