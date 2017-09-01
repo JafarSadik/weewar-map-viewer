@@ -35,13 +35,14 @@ dependencies {
 task convertMaps {
     description = "Converts original weewar maps from XML to JSON format"
     group = "weewar map viewer"
+
+    def mapsDir = "${project.rootDir}/src/main/resources/public/maps"
+    def script = "${project.rootDir}/bin/maps/convert-maps.groovy"
+    def args = ["--force", mapsDir] as String[]
+    def bindings = [forceOverride: true, targetDir: mapsDir]
+
     doLast {
-        def bindings = new Binding([
-                forceOverride: true,
-                targetDir    : new File("src/main/resources/public/maps").absolutePath
-        ])
-        def shell = new GroovyShell(bindings)
-        def convertMaps = new File("bin/maps/convert-maps.groovy")
-        shell.run(convertMaps)
+        def shell = new GroovyShell(new Binding(bindings))
+        shell.run(new File(script), args)
     }
 }

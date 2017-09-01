@@ -33,10 +33,10 @@ def worker(thread_no):
 def download_map(map_id):
     weewar_map = read_url(weewar_map_url(map_id))
     if weewar_map is not None:
-        map_file = open('maps/%d.txt' % map_id, mode='w')
+        map_file = open('maps/%d.xml' % map_id, mode='w')
         map_file.write(weewar_map)
         map_file.close()
-        print("saved maps/%d.txt" % map_id)
+        print("saved maps/%d.xml" % map_id)
 
 
 def read_url(url):

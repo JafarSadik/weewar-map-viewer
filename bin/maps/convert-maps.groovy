@@ -39,7 +39,7 @@ if (!options.force && targetDir.exists()) {
     def choice = (char) System.in.read()
     if (choice != 'y' && choice != 'Y') System.exit(1)
 }
-targetDir.mkdir()
+targetDir.mkdirs()
 
 // Converting all maps to JSON format
 def xmlParser = new XmlParser()
