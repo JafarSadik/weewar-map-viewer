@@ -12,9 +12,9 @@ XmlParser.metaClass.tryParse = { inputStream, errorHandler ->
 Class.metaClass.isLoaded = { args ->
     try {
         Class.forName(args.name)
-        args.loaded()
+        if (args.loaded) args.loaded()
     } catch (Throwable t) {
-        args.otherwise()
+        if (args.otherwise) args.otherwise()
         return false
     }
     return true

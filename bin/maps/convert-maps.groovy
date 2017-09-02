@@ -16,7 +16,7 @@ importScript("${baseDir}/lib/utils.groovy")
 // Script arguments and options
 Class.isLoaded name: 'groovy.util.CliBuilder',
         loaded: {
-            // obtain from command linne
+            // obtain from command line
             importScript("${baseDir}/lib/cli.groovy")
         },
         otherwise: {
