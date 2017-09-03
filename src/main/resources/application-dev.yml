@@ -1,0 +1,14 @@
+# ---------------------------------
+# Development environment configuration
+# spring boot profile: dev
+# ---------------------------------
+server:
+  port: ${PORT:8080}
+
+spring:
+# Disable template cache
+  thymeleaf:
+    cache: false
+
+logging:
+  level: debug

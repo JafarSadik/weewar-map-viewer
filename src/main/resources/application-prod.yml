@@ -1,0 +1,9 @@
+# ---------------------------------
+# Production environment configuration
+# spring boot profile: prod
+# ---------------------------------
+server:
+  port: ${PORT:8080}
+
+logging:
+  level: info

@@ -10,12 +10,27 @@ XmlParser.metaClass.tryParse = { inputStream, errorHandler ->
 
 // Check if a class is loaded
 Class.metaClass.isLoaded = { args ->
+    boolean classExists;
     try {
         Class.forName(args.name)
-        if (args.loaded) args.loaded()
-    } catch (Throwable t) {
-        if (args.otherwise) args.otherwise()
-        return false
+        classExists = true
+    } catch (Throwable ignore) {
+        classExists = false
     }
-    return true
+
+    if (classExists && args.loaded) {
+        return args.loaded()
+    } else if (!classExists && args.otherwise) {
+        return args.otherwise()
+    }
+    return classExists
+}
+
+// Declares a default bindings if not defined
+defaultBindings = { Map<String, Object> defaults ->
+    defaults.each {
+        if (!binding.hasVariable(it.key)) {
+            binding.setVariable(it.key, it.value)
+        }
+    }
 }

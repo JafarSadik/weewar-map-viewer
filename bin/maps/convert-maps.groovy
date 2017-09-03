@@ -3,6 +3,7 @@
 // -------------------------------------------------------------
 
 import groovy.json.JsonBuilder
+
 import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
 
@@ -10,27 +11,34 @@ import java.util.zip.ZipFile
 def script = getClass().protectionDomain.codeSource.location.path
 def baseDir = script.replaceAll("\\\\", "/").substring(0, script.lastIndexOf("/"))
 
+//Import utilities
 def importScript = { evaluate(new File(it)) }
-importScript("${baseDir}/lib/utils.groovy")
+importScript("$baseDir/lib/utils.groovy")
 
 // Script arguments and options
-Class.isLoaded name: 'groovy.util.CliBuilder',
-        loaded: {
-            // obtain from command line
-            importScript("${baseDir}/lib/cli.groovy")
+options = Class.isLoaded name: 'groovy.util.CliBuilder',
+        loaded: { /*obtain arguments & options from command line*/
+            importScript("$baseDir/lib/cli.groovy")
+            parseCli(this.args)
         },
-        otherwise: {
-            // obtain from groovy bindings
-            options = [force: forceOverride]
-            args = [targetDir]
+        otherwise: { /*obtain arguments & options from groovy bindings*/
+            defaultBindings([force: false, silent: false, help: false, pretty: false])
+            [force: force, silent: silent, help: help, pretty: pretty, arguments: { [targetMapsDir] }]
         }
+
+// Display help if required
+arguments = options.arguments()
+if (options.help || arguments.size() > 1) {
+    cli.usage()
+    System.exit(-1)
+}
 
 // Modify 'println' to support silent mode
 def println = { text -> if (!options.silent) println text }
 
 // Source map archive and target directory
-def mapsArchive = new ZipFile("${baseDir}/weewar-maps.zip")
-def targetDir = new File(args ? args[0] : "${baseDir}/weewar-maps-json")
+def mapsArchive = new ZipFile("$baseDir/weewar-maps.zip")
+def targetDir = new File(arguments ? arguments[0] : "$baseDir/weewar-maps-json")
 
 // Create target directory or ask to override
 if (!options.force && targetDir.exists()) {
@@ -47,11 +55,11 @@ println "Converting map files..."
 mapsArchive.entries().findAll { !it.isDirectory() }.each { ZipEntry zipEntry ->
     mapsArchive.getInputStream(zipEntry).withCloseable { inputStream ->
         // Parse XML map
-        def errorHandler = { e -> println "Failed to parse map file: ${zipEntry.name}" }
+        def errorHandler = { e -> println "Failed to parse map file: $zipEntry.name" }
         Optional<Node> xml = xmlParser.tryParse(inputStream, errorHandler)
         xml.ifPresent { Node srcMap ->
             def mapFile = new File(targetDir.getPath() + "/" + srcMap.@id)
-            println "${mapsArchive.name}/${zipEntry.name} -> ${mapFile.absolutePath}"
+            println "$mapsArchive.name/$zipEntry.name -> $mapFile.absolutePath"
 
             // Copy map details: id, name, creator, size, ...
             def dstMap = [
@@ -90,16 +98,16 @@ mapsArchive.entries().findAll { !it.isDirectory() }.each { ZipEntry zipEntry ->
                {x:1,y:7,type:'Woods'}
                ]
             */
-            srcMap.terrains.terrain.each {
+            srcMap.terrains.terrain.each { tile ->
                 //add tile, omit null values
                 dstMap.terrain << [
-                        x           : it.@x as Integer,
-                        y           : it.@y as Integer,
-                        type        : it.@type,
-                        startFaction: it.@startFaction as Integer,
-                        direction   : it.@direction,
-                        unit        : it.@startUnit,
-                        unitOwner   : it.@startUnitOwner as Integer
+                        x           : tile.@x as Integer,
+                        y           : tile.@y as Integer,
+                        type        : tile.@type,
+                        startFaction: tile.@startFaction as Integer,
+                        direction   : tile.@direction,
+                        unit        : tile.@startUnit,
+                        unitOwner   : tile.@startUnitOwner as Integer
                 ].findAll { it.value != null }
             }
 

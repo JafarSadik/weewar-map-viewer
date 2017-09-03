@@ -25,6 +25,8 @@ dependencies {
         exclude module: 'spring-boot-starter-tomcat'
     }
     compile 'org.springframework.boot:spring-boot-starter-jetty:1.5.6.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-thymeleaf:1.5.6.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-web:1.5.6.RELEASE'
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-all:1.10+'
@@ -36,10 +38,10 @@ task convertMaps {
     description = "Converts original weewar maps from XML to JSON format"
     group = "weewar map viewer"
 
-    def targetMapsDir = "${project.rootDir}/src/main/resources/public/maps"
+    def targetMapsDir = "${project.rootDir}/src/main/resources/public/api/maps"
     def script = "${project.rootDir}/bin/maps/convert-maps.groovy"
     def args = ["--force", targetMapsDir] as String[]
-    def bindings = [forceOverride: true, targetDir: targetMapsDir]
+    def bindings = [force: true, targetMapsDir: targetMapsDir]
 
     doLast {
         def shell = new GroovyShell(new Binding(bindings))
