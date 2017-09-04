@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title></title>
+    <title th:text="${map.mapName}">Awesome map</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
@@ -22,7 +22,7 @@
     </div>
 
     <div id="map_container">
-        <img src="/images/maps/1.png" th:src="'/images/maps/' + ${map.mapId} + '.png'"/>
+        <img src="../public/images/maps/placeholder.png" th:src="'/images/maps/' + ${map.mapId} + '.png'"/>
     </div>
 </div>
 </body>

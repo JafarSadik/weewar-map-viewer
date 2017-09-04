@@ -9,5 +9,4 @@ public class WeewarMapViewer {
     public static void main(String[] args) {
         SpringApplication.run(WeewarMapViewer.class, args);
     }
-
 }
