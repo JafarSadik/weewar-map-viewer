@@ -1,15 +1,5 @@
 # ---------------------------------
 # Production environment configuration
-# spring boot profile: prod
 # ---------------------------------
-server:
-  port: ${PORT:8080}
-
-spring:
-  mvc:
-    # Disable default spring favicon
-    favicon:
-      enabled: false
-
 logging:
   level: info

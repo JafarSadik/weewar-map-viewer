@@ -1,0 +1,15 @@
+# ---------------------------------
+# Default configuration shared by all spring profiles
+# ---------------------------------
+server:
+  port: ${PORT:8080}
+
+spring:
+  mvc:
+  # Disable default spring favicon
+    favicon:
+      enabled: false
+  # Disable spring banner
+  main:
+    banner-mode: 'off'
+
