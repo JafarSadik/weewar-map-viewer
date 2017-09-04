@@ -3,11 +3,27 @@
 
 <head>
     <title></title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<p>Empty map page</p>
-<p th:text="'Map id:' + ${id}" />
-<p th:text="'Map name:' + ${name}" />
+
+<div id="main_container">
+    <div id="map_headline_container">
+        <span id="map-name" th:text="${map.mapName}">Awesome map</span>
+        <span th:text="'(rev ' + ${map.revision} + ')'">(revision 1)</span>
+        by <span th:text="${map.creator}">Jafar</span>
+    </div>
+
+    <div id="map_details_container">
+        <span th:text="${map.players}">2</span> players |
+        Income: <span th:text="${map.income}">200</span> |
+        Start credits: <span th:text="${map.startCredits}">100</span> |
+        Map size: <span th:text="${map.width} + ' x ' + ${map.height}">25 x 20</span>
+    </div>
+
+    <div id="map_container">
+        <img src="/images/maps/1.png" th:src="'/images/maps/' + ${map.mapId} + '.png'"/>
+    </div>
+</div>
 </body>
 </html>
