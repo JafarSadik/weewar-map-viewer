@@ -6,9 +6,13 @@ server:
   port: ${PORT:8080}
 
 spring:
-# Disable template cache
+  # Disable template cache
   thymeleaf:
     cache: false
+  mvc:
+    # Disable default spring favicon
+    favicon:
+      enabled: false
 
 logging:
   level: debug

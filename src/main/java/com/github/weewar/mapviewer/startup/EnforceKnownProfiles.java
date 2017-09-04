@@ -24,11 +24,11 @@ public class EnforceKnownProfiles {
     @PostConstruct
     public void onStartup() {
         boolean prod = profiles.contains("prod"), dev = profiles.contains("dev");
-        enforceCondition(prod || dev, "One of the following spring boot profiles is required: 'dev' or 'prod'");
-        enforceCondition(prod ^ dev, "Cannot use 'dev' and 'prod' profiles at the same time");
+        checkCondition(prod || dev, "One of the following spring boot profiles is required: 'dev' or 'prod'");
+        checkCondition(prod ^ dev, "Cannot use 'dev' and 'prod' profiles at the same time");
     }
 
-    private void enforceCondition(boolean condition, String description) {
+    private void checkCondition(boolean condition, String description) {
         if (!condition) {
             logger.error(description);
             System.exit(1);
