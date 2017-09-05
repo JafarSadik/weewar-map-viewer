@@ -21,11 +21,6 @@ public class MapPageController {
                                 @PathVariable(value = "map_name", required = false) String urlEncodedMapName) {
         return mapDAO.findByMapId(mapId)
                 .map(map -> new ModelAndView("map-page", "map", map))
-                .orElseGet(this::gotoSearchPage);
-    }
-
-    @GetMapping("/map")
-    public ModelAndView gotoSearchPage() {
-        return new ModelAndView("redirect:/search");
+                .orElseGet(() -> new ModelAndView("redirect:/search"));
     }
 }

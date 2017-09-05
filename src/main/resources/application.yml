@@ -3,6 +3,11 @@
 # ---------------------------------
 server:
   port: ${PORT:8080}
+  #Disable default (whitelabel) error page
+  error:
+    whitelabel:
+      enabled: false
+    include-stacktrace: never
 
 spring:
   mvc:
@@ -12,4 +17,3 @@ spring:
   # Disable spring banner
   main:
     banner-mode: 'off'
-
