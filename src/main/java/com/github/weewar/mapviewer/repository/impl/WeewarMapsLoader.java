@@ -1,5 +1,6 @@
 package com.github.weewar.mapviewer.repository.impl;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.weewar.mapviewer.exceptions.MapLoadException;
 import com.github.weewar.mapviewer.model.WeewarMap;
@@ -14,7 +15,12 @@ import static java.util.stream.Collectors.toList;
 
 @Component
 public class WeewarMapsLoader {
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper;
+
+    public WeewarMapsLoader() {
+        objectMapper = new ObjectMapper()
+                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    }
 
     public List<WeewarMap> loadAll(String mapsLocation) throws MapLoadException {
         try {
