@@ -14,6 +14,7 @@ def baseDir = script.replaceAll("\\\\", "/").substring(0, script.lastIndexOf("/"
 //Import utilities
 def importScript = { evaluate(new File(it)) }
 importScript("$baseDir/lib/utils.groovy")
+importScript("$baseDir/lib/converters.groovy")
 
 // Script arguments and options
 options = Class.isLoaded name: 'groovy.util.CliBuilder',
@@ -103,11 +104,11 @@ mapsArchive.entries().findAll { !it.isDirectory() }.each { ZipEntry zipEntry ->
                 dstMap.terrain << [
                         x           : tile.@x as Integer,
                         y           : tile.@y as Integer,
-                        type        : tile.@type,
-                        startFaction: tile.@startFaction as Integer,
+                        type        : convertMapItem(tile.@type),
+                        startFaction: convertTeam(tile.@startFaction as Integer),
                         direction   : tile.@direction,
-                        unit        : tile.@startUnit,
-                        unitOwner   : tile.@startUnitOwner as Integer
+                        unit        : convertMapItem(tile.@startUnit),
+                        unitOwner   : convertTeam(tile.@startUnitOwner as Integer)
                 ].findAll { it.value != null }
             }
 

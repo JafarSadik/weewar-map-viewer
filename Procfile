@@ -1,1 +1,1 @@
-web: java -jar -Xms128m -Xmx384m -Dspring.profiles.active=prod build/libs/weewar-map-viewer.jar
+web: java -jar -Xms128m -Xmx350m -Dspring.profiles.active=prod build/libs/weewar-map-viewer.jar
