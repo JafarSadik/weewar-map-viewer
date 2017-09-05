@@ -1,5 +1,8 @@
 package com.github.weewar.mapviewer.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class WeewarMap {
     private final long mapId;
     private final String mapName;
@@ -11,8 +14,10 @@ public class WeewarMap {
     private final int width;
     private final int height;
 
-    public WeewarMap(long mapId, String mapName, int revision, String creator, int players,
-                     int startCredits, int income, int width, int height) {
+    @JsonCreator
+    public WeewarMap(@JsonProperty("id") long mapId, @JsonProperty("name") String mapName, @JsonProperty("revision") int revision,
+                     @JsonProperty("creator") String creator, @JsonProperty("players") int players, @JsonProperty("initialCredits") int startCredits,
+                     @JsonProperty("perBaseCredits") int income, @JsonProperty("width") int width, @JsonProperty("height") int height) {
         this.mapId = mapId;
         this.mapName = mapName;
         this.revision = revision;

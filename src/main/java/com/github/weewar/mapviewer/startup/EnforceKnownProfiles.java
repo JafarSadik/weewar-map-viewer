@@ -24,8 +24,9 @@ public class EnforceKnownProfiles {
     @PostConstruct
     public void onStartup() {
         boolean prod = profiles.contains("prod"), dev = profiles.contains("dev");
-        checkCondition(prod || dev, "One of the following spring boot profiles is required: 'dev' or 'prod'");
-        checkCondition(prod ^ dev, "Cannot use 'dev' and 'prod' profiles at the same time");
+        checkCondition(prod || dev, "One of the following spring boot profiles is required: 'dev' or 'prod'. " +
+                "Please, activate proper profile like this: java -jar -Dspring.profiles.active=prod weewar-map-viewer.jar");
+        checkCondition(prod ^ dev, "Cannot use 'dev' and 'prod' profiles at the same time.");
     }
 
     private void checkCondition(boolean condition, String description) {
