@@ -1,6 +1,6 @@
 package com.github.weewar.mapviewer.startup;
 
-import com.github.weewar.mapviewer.repository.impl.InMemoryMapDAO;
+import com.github.weewar.mapviewer.repository.memory.InMemoryMapDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

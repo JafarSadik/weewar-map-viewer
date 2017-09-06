@@ -1,4 +1,4 @@
-package com.github.weewar.mapviewer.repository.impl;
+package com.github.weewar.mapviewer.repository.memory;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -35,7 +35,7 @@ def mapItems = [
 // Converts weewar-specific name of a single map item (terrain, building or unit) to name used in this project
 convertMapItem = { String type ->
     String result = mapItems[type]
-    assert !type || result //expecting non-null result for non-null type
+    assert !type || result //expecting non-null result for a non-null type
     return result
 }
 
@@ -52,6 +52,6 @@ def teams = [
 // Converts team name from a number to string
 convertTeam = { Integer team ->
     String result = teams[team]
-    assert !team || result //expecting non-null result for non-null type
+    assert !team || result //expecting non-null result for a non-null type
     return result
 }

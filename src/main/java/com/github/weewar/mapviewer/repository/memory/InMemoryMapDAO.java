@@ -1,4 +1,4 @@
-package com.github.weewar.mapviewer.repository.impl;
+package com.github.weewar.mapviewer.repository.memory;
 
 import com.github.weewar.mapviewer.model.WeewarMap;
 import com.github.weewar.mapviewer.repository.MapDAO;

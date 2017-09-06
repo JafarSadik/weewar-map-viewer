@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class RedirectingErrorController implements ErrorController {
+public class ErrorRedirectingController implements ErrorController {
     @Override
     public String getErrorPath() {
         return "/error";
