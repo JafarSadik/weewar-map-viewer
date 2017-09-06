@@ -2,7 +2,7 @@ package com.github.weewar.mapviewer.service;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.weewar.mapviewer.exceptions.MapLoadException;
+import com.github.weewar.mapviewer.exceptions.MapParseException;
 import com.github.weewar.mapviewer.model.WeewarMap;
 import com.github.weewar.mapviewer.utils.ClassPath;
 import org.springframework.core.io.Resource;
@@ -22,22 +22,18 @@ public class WeewarMapLoader {
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
-    public List<WeewarMap> loadAll(String mapsLocation) throws MapLoadException {
-        try {
-            return ClassPath.resources(mapsLocation)
-                    .parallelStream()
-                    .map(this::loadMap)
-                    .collect(toList());
-        } catch (IOException e) {
-            throw new MapLoadException("Unable to locate maps in a classpath: " + mapsLocation, e);
-        }
+    public List<WeewarMap> loadAll(String mapsLocation) {
+        return ClassPath.resources(mapsLocation)
+                .parallelStream()
+                .map(this::loadMap)
+                .collect(toList());
     }
 
-    private WeewarMap loadMap(Resource resource) throws MapLoadException {
+    private WeewarMap loadMap(Resource resource) throws MapParseException {
         try {
             return objectMapper.readValue(resource.getURL(), WeewarMap.class);
         } catch (IOException e) {
-            throw new MapLoadException("Failed to parse json map file: " + resource.getFilename(), e);
+            throw new MapParseException("Failed to parse json map file: " + resource.getFilename(), e);
         }
     }
 }
