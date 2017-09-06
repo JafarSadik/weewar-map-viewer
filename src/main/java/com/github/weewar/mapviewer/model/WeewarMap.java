@@ -3,7 +3,10 @@ package com.github.weewar.mapviewer.model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class WeewarMap implements HexMap {
+import static com.github.weewar.mapviewer.model.Constants.HEX_HEIGHT;
+import static com.github.weewar.mapviewer.model.Constants.HEX_WIDTH;
+
+public class WeewarMap {
     private final long mapId;
     private final String mapName;
     private final int revision;
@@ -29,12 +32,10 @@ public class WeewarMap implements HexMap {
         this.height = height;
     }
 
-    @Override
     public Vector2D<Integer> getSize() {
         return new Vector2D<>(width, height);
     }
 
-    @Override
     public Vector2D<Integer> hexToPixel(int column, int row) {
         Vector2D.Mutable<Integer> point = new Vector2D.Mutable<>();
         double horizontalOffset = (row % 2 != 0 ? 0.5 * HEX_WIDTH : 0);
@@ -44,7 +45,6 @@ public class WeewarMap implements HexMap {
         return point.immutable();
     }
 
-    @Override
     public Vector2D<Integer> getSizeInPixels() {
         Vector2D.Mutable<Integer> mapSize = new Vector2D.Mutable<>();
         double maxHorizontalOffset = (height > 1 ? 0.5 * HEX_WIDTH : 0);

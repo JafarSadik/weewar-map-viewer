@@ -4,6 +4,6 @@ import com.github.weewar.mapviewer.model.WeewarMap;
 
 import java.util.Optional;
 
-public interface MapDAO {
+public interface WeewarMapDAO {
     Optional<WeewarMap> findByMapId(long mapId);
 }

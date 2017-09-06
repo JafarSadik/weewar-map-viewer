@@ -1,6 +1,7 @@
 package com.github.weewar.mapviewer.controllers;
 
-import com.github.weewar.mapviewer.dao.MapDAO;
+import com.github.weewar.mapviewer.dao.WeewarMapDAO;
+import com.github.weewar.mapviewer.model.WeewarMap;
 import com.github.weewar.mapviewer.service.WeewarMapRenderer;
 import com.github.weewar.mapviewer.utils.Images;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,22 +16,29 @@ import java.awt.image.BufferedImage;
 @Controller
 public class ImageController {
     private final WeewarMapRenderer weewarMapRenderer;
-    private final MapDAO mapDAO;
+    private final WeewarMapDAO weewarMapDAO;
 
     @Autowired
-    public ImageController(WeewarMapRenderer weewarMapRenderer, MapDAO mapDAO) {
+    public ImageController(WeewarMapRenderer weewarMapRenderer, WeewarMapDAO weewarMapDAO) {
         this.weewarMapRenderer = weewarMapRenderer;
-        this.mapDAO = mapDAO;
+        this.weewarMapDAO = weewarMapDAO;
     }
 
     @GetMapping(value = "/images/maps/{map_id}", produces = MediaType.IMAGE_PNG_VALUE)
     public ResponseEntity<byte[]> renderWeewarMap(@PathVariable("map_id") Integer mapId) {
-        return mapDAO.findByMapId(mapId).map(weewarMap -> {
-            BufferedImage image = weewarMapRenderer.render(weewarMap);
-            return ResponseEntity.ok()
-                    .contentType(MediaType.IMAGE_PNG)
-                    .body(Images.toPNG(image));
+        return weewarMapDAO.findByMapId(mapId)
+                .map(this::weewarMapPNGImage)
+                .orElse(notFoundError());
+    }
 
-        }).orElse(ResponseEntity.notFound().build());
+    private ResponseEntity<byte[]> weewarMapPNGImage(WeewarMap weewarMap) {
+        BufferedImage image = weewarMapRenderer.render(weewarMap);
+        return ResponseEntity.ok()
+                .contentType(MediaType.IMAGE_PNG)
+                .body(Images.toPNG(image));
+    }
+
+    private ResponseEntity<byte[]> notFoundError() {
+        return ResponseEntity.notFound().build();
     }
 }
