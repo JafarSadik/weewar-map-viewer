@@ -18,7 +18,7 @@ public class MapPageController {
 
     @GetMapping({"/map/{map_id}", "/map/{map_id}/{map_name}"})
     public ModelAndView mapPage(@PathVariable("map_id") Integer mapId,
-                                @PathVariable(value = "map_name", required = false) String urlEncodedMapName) {
+                                @PathVariable(value = "url_encoded_map_name", required = false) String urlEncodedMapName) {
         return mapDAO.findByMapId(mapId)
                 .map(map -> new ModelAndView("map-page", "map", map))
                 .orElseGet(() -> new ModelAndView("redirect:/search"));
