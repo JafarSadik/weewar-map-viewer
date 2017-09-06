@@ -1,4 +1,4 @@
-package com.github.weewar.mapviewer.repository;
+package com.github.weewar.mapviewer.dao;
 
 import com.github.weewar.mapviewer.model.WeewarMap;
 

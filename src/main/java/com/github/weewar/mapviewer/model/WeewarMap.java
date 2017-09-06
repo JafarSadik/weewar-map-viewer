@@ -3,7 +3,7 @@ package com.github.weewar.mapviewer.model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class WeewarMap {
+public class WeewarMap implements HexMap {
     private final long mapId;
     private final String mapName;
     private final int revision;
@@ -27,6 +27,31 @@ public class WeewarMap {
         this.income = income;
         this.width = width;
         this.height = height;
+    }
+
+    @Override
+    public Vector2D<Integer> getSize() {
+        return new Vector2D<>(width, height);
+    }
+
+    @Override
+    public Vector2D<Integer> hexToPixel(int column, int row) {
+        Vector2D.Mutable<Integer> point = new Vector2D.Mutable<>();
+        double horizontalOffset = (row % 2 != 0 ? 0.5 * HEX_WIDTH : 0);
+        double verticalDistance = 0.75 * HEX_HEIGHT;
+        point.setX((int) (column * HEX_WIDTH + horizontalOffset));
+        point.setY((int) (row * verticalDistance));
+        return point.immutable();
+    }
+
+    @Override
+    public Vector2D<Integer> getSizeInPixels() {
+        Vector2D.Mutable<Integer> mapSize = new Vector2D.Mutable<>();
+        double maxHorizontalOffset = (height > 1 ? 0.5 * HEX_WIDTH : 0);
+        double verticalDistance = 0.75 * HEX_HEIGHT;
+        mapSize.setX((int) (width * HEX_WIDTH + maxHorizontalOffset));
+        mapSize.setY((int) (HEX_HEIGHT + (height - 1) * verticalDistance));
+        return mapSize.immutable();
     }
 
     public long getMapId() {

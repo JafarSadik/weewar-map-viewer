@@ -1,4 +1,4 @@
-package com.github.weewar.mapviewer.repository.memory;
+package com.github.weewar.mapviewer.service;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -6,18 +6,18 @@ import com.github.weewar.mapviewer.exceptions.MapLoadException;
 import com.github.weewar.mapviewer.model.WeewarMap;
 import com.github.weewar.mapviewer.utils.ClassPath;
 import org.springframework.core.io.Resource;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-@Component
-public class WeewarMapsLoader {
+@Service
+public class WeewarMapLoader {
     private final ObjectMapper objectMapper;
 
-    public WeewarMapsLoader() {
+    public WeewarMapLoader() {
         objectMapper = new ObjectMapper()
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }

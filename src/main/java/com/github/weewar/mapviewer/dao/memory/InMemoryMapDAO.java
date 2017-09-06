@@ -1,7 +1,8 @@
-package com.github.weewar.mapviewer.repository.memory;
+package com.github.weewar.mapviewer.dao.memory;
 
+import com.github.weewar.mapviewer.dao.MapDAO;
 import com.github.weewar.mapviewer.model.WeewarMap;
-import com.github.weewar.mapviewer.repository.MapDAO;
+import com.github.weewar.mapviewer.service.WeewarMapLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -16,11 +17,11 @@ import static java.util.stream.Collectors.toMap;
 public class InMemoryMapDAO implements MapDAO {
     private final Map<Long, WeewarMap> weewarMaps = new ConcurrentHashMap<>(13000 /*max maps*/,
             0.75f /*default load factor*/, 1 /*single shard*/);
-    private final WeewarMapsLoader weewarMapsLoader;
+    private final WeewarMapLoader weewarMapLoader;
 
     @Autowired
-    public InMemoryMapDAO(WeewarMapsLoader weewarMapsLoader) {
-        this.weewarMapsLoader = weewarMapsLoader;
+    public InMemoryMapDAO(WeewarMapLoader weewarMapLoader) {
+        this.weewarMapLoader = weewarMapLoader;
     }
 
     @Override
@@ -30,7 +31,7 @@ public class InMemoryMapDAO implements MapDAO {
     }
 
     public void populate() {
-        List<WeewarMap> loadedMaps = weewarMapsLoader.loadAll("/public/api/maps/*");
+        List<WeewarMap> loadedMaps = weewarMapLoader.loadAll("/public/api/maps/*");
         weewarMaps.putAll(loadedMaps.stream().collect(toMap(WeewarMap::getMapId, map -> map)));
     }
 }
