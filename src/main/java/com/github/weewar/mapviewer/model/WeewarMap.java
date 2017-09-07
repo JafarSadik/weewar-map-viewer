@@ -15,11 +15,13 @@ public class WeewarMap {
     private final int income;
     private final int width;
     private final int height;
+    private final Terrain terrain;
 
     @JsonCreator
     public WeewarMap(@JsonProperty("id") long mapId, @JsonProperty("name") String mapName, @JsonProperty("revision") int revision,
                      @JsonProperty("creator") String creator, @JsonProperty("players") int players, @JsonProperty("initialCredits") int startCredits,
-                     @JsonProperty("perBaseCredits") int income, @JsonProperty("width") int width, @JsonProperty("height") int height) {
+                     @JsonProperty("perBaseCredits") int income, @JsonProperty("width") int width, @JsonProperty("height") int height,
+                     @JsonProperty("terrain") Terrain terrain) {
         this.mapId = mapId;
         this.mapName = mapName;
         this.revision = revision;
@@ -29,6 +31,7 @@ public class WeewarMap {
         this.income = income;
         this.width = width;
         this.height = height;
+        this.terrain = terrain;
     }
 
     public Vector2D<Integer> getSize() {
@@ -37,8 +40,8 @@ public class WeewarMap {
 
     public Vector2D<Integer> hexToPixel(int column, int row) {
         Vector2D<Integer> point = new Vector2D<>();
-        float currentRowHorizontalOffset = (row % 2 != 0 ? HEX_HORIZONTAL_OFFSET: 0);
-        point.setX(Math.round(column * HEX_WIDTH + currentRowHorizontalOffset));
+        float rowHorizontalOffset = (row % 2 != 0 ? HEX_HORIZONTAL_OFFSET: 0);
+        point.setX(Math.round(column * HEX_WIDTH + rowHorizontalOffset));
         point.setY(Math.round(row * HEX_VERTICAL_DISTANCE));
         return point;
     }
@@ -85,5 +88,9 @@ public class WeewarMap {
 
     public int getHeight() {
         return height;
+    }
+
+    public Terrain getTerrain() {
+        return terrain;
     }
 }
