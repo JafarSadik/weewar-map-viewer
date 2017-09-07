@@ -1,6 +1,11 @@
 package com.github.weewar.mapviewer.service.impl;
 
+import com.github.weewar.mapviewer.exceptions.ImageNotFoundException;
 import com.github.weewar.mapviewer.exceptions.ImagePreloadException;
+import com.github.weewar.mapviewer.model.enums.Direction;
+import com.github.weewar.mapviewer.model.enums.Owner;
+import com.github.weewar.mapviewer.model.enums.TerrainType;
+import com.github.weewar.mapviewer.model.enums.UnitType;
 import com.github.weewar.mapviewer.service.ImageRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +18,12 @@ public class ImageRepositoryImpl implements ImageRepository {
     private Image plain;
 
     @Override
-    public Image getTerrainImage(String terrainType, String owner, String direction) {
+    public Image getTerrain(TerrainType terrainType, Owner owner, Direction direction) throws ImageNotFoundException {
         return plain;
     }
 
     @Override
-    public Image getUnitImage(String unitType, String owner) {
+    public Image getUnit(UnitType terrainType, Owner owner) throws ImageNotFoundException {
         return plain;
     }
 

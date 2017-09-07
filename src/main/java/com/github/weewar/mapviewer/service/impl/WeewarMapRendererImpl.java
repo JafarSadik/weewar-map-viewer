@@ -1,5 +1,6 @@
 package com.github.weewar.mapviewer.service.impl;
 
+import com.github.weewar.mapviewer.model.Tile;
 import com.github.weewar.mapviewer.model.Vector2D;
 import com.github.weewar.mapviewer.model.WeewarMap;
 import com.github.weewar.mapviewer.service.ImageRepository;
@@ -21,20 +22,28 @@ public class WeewarMapRendererImpl implements WeewarMapRenderer {
 
     @Override
     public BufferedImage render(WeewarMap weewarMap) {
+        // create empty image of a proper size
         Vector2D<Integer> imageSize = weewarMap.getSizeInPixels();
         BufferedImage weewarMapImage = new BufferedImage(imageSize.getX(), imageSize.getY(), BufferedImage.TYPE_INT_ARGB);
         Graphics g = weewarMapImage.getGraphics();
 
-        // fill with transparent background
+        // fill with a transparent background
         g.setColor(new Color(0, 0, 0, 0));
         g.fillRect(0, 0, imageSize.getX(), imageSize.getY());
 
-        // render all tiles and units
-        for (int column = 0; column < weewarMap.getWidth(); column++) {
-            for (int row = 0; row < weewarMap.getHeight(); row++) {
-                Vector2D<Integer> point = weewarMap.hexToPixel(column, row);
-                Image plain = images.getTerrainImage(null, null, null);
-                g.drawImage(plain, point.getX(), point.getY(), null);
+        // render terrain, buildings and units
+        for (Tile tile : weewarMap.getTerrain()) {
+            Vector2D<Integer> imageLocation = weewarMap.hexToPixel(tile.getX(), tile.getY());
+            // render terrain and buildings
+            Image terrain = images.getTerrain(tile.getType(), tile.getStartFaction(), tile.getDirection());
+            if (terrain != null) {
+                g.drawImage(terrain, imageLocation.getX(), imageLocation.getY(), null);
+            }
+
+            // render units
+            Image unit = images.getUnit(tile.getUnit(), tile.getUnitOwner());
+            if (unit != null) {
+                g.drawImage(unit, imageLocation.getX(), imageLocation.getY(), null);
             }
         }
         return weewarMapImage;
