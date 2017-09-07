@@ -3,8 +3,7 @@ package com.github.weewar.mapviewer.model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.github.weewar.mapviewer.model.Constants.HEX_HEIGHT;
-import static com.github.weewar.mapviewer.model.Constants.HEX_WIDTH;
+import static com.github.weewar.mapviewer.model.Constants.*;
 
 public class WeewarMap {
     private final long mapId;
@@ -38,19 +37,17 @@ public class WeewarMap {
 
     public Vector2D<Integer> hexToPixel(int column, int row) {
         Vector2D.Mutable<Integer> point = new Vector2D.Mutable<>();
-        double horizontalOffset = (row % 2 != 0 ? 0.5 * HEX_WIDTH : 0);
-        double verticalDistance = 0.75 * HEX_HEIGHT;
-        point.setX((int) (column * HEX_WIDTH + horizontalOffset));
-        point.setY((int) (row * verticalDistance));
+        float currentRowHorizontalOffset = (row % 2 != 0 ? HEX_HORIZONTAL_OFFSET: 0);
+        point.setX(Math.round(column * HEX_WIDTH + currentRowHorizontalOffset));
+        point.setY(Math.round(row * HEX_VERTICAL_DISTANCE));
         return point.immutable();
     }
 
     public Vector2D<Integer> getSizeInPixels() {
         Vector2D.Mutable<Integer> mapSize = new Vector2D.Mutable<>();
-        double maxHorizontalOffset = (height > 1 ? 0.5 * HEX_WIDTH : 0);
-        double verticalDistance = 0.75 * HEX_HEIGHT;
-        mapSize.setX((int) (width * HEX_WIDTH + maxHorizontalOffset));
-        mapSize.setY((int) (HEX_HEIGHT + (height - 1) * verticalDistance));
+        float maxHorizontalOffset = (height > 1 ? HEX_HORIZONTAL_OFFSET : 0);
+        mapSize.setX(Math.round(width * HEX_WIDTH + maxHorizontalOffset));
+        mapSize.setY(Math.round(HEX_HEIGHT + (height - 1) * HEX_VERTICAL_DISTANCE));
         return mapSize.immutable();
     }
 

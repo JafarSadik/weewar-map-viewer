@@ -32,9 +32,9 @@ public class WeewarMapRendererImpl implements WeewarMapRenderer {
         // render all tiles and units
         for (int column = 0; column < weewarMap.getWidth(); column++) {
             for (int row = 0; row < weewarMap.getHeight(); row++) {
-                Vector2D point = weewarMap.hexToPixel(column, row);
+                Vector2D<Integer> point = weewarMap.hexToPixel(column, row);
                 Image plain = images.getTerrainImage(null, null, null);
-                g.drawImage(plain, (int) point.getX(), (int) point.getY(), null);
+                g.drawImage(plain, point.getX(), point.getY(), null);
             }
         }
         return weewarMapImage;
