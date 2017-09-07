@@ -19,9 +19,9 @@ public class WeewarMap {
 
     @JsonCreator
     public WeewarMap(@JsonProperty("id") long mapId, @JsonProperty("name") String mapName, @JsonProperty("revision") int revision,
-                     @JsonProperty("creator") String creator, @JsonProperty("players") int players, @JsonProperty("initialCredits") int startCredits,
-                     @JsonProperty("perBaseCredits") int income, @JsonProperty("width") int width, @JsonProperty("height") int height,
-                     @JsonProperty("terrain") Terrain terrain) {
+                     @JsonProperty("creator") String creator, @JsonProperty("players") int players, @JsonProperty("width") int width,
+                     @JsonProperty("perBaseCredits") int income, @JsonProperty("initialCredits") int startCredits,
+                     @JsonProperty("height") int height, @JsonProperty("terrain") Terrain terrain) {
         this.mapId = mapId;
         this.mapName = mapName;
         this.revision = revision;
@@ -40,7 +40,7 @@ public class WeewarMap {
 
     public Vector2D<Integer> hexToPixel(int column, int row) {
         Vector2D<Integer> point = new Vector2D<>();
-        float rowHorizontalOffset = (row % 2 != 0 ? HEX_HORIZONTAL_OFFSET: 0);
+        float rowHorizontalOffset = (row % 2 != 0 ? HEX_HORIZONTAL_OFFSET : 0);
         point.setX(Math.round(column * HEX_WIDTH + rowHorizontalOffset));
         point.setY(Math.round(row * HEX_VERTICAL_DISTANCE));
         return point;
@@ -92,5 +92,21 @@ public class WeewarMap {
 
     public Terrain getTerrain() {
         return terrain;
+    }
+
+    @Override
+    public String toString() {
+        return "WeewarMap{" +
+                "mapId=" + mapId +
+                ", mapName='" + mapName + '\'' +
+                ", revision=" + revision +
+                ", creator='" + creator + '\'' +
+                ", players=" + players +
+                ", startCredits=" + startCredits +
+                ", income=" + income +
+                ", width=" + width +
+                ", height=" + height +
+                ", terrain=" + terrain +
+                '}';
     }
 }

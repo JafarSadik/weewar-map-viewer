@@ -15,6 +15,6 @@ public class Terrain {
 
     @Override
     public String toString() {
-        return "Terrain {" + "tiles=" + tiles + '}';
+        return "Terrain{" + "tiles=" + tiles + '}';
     }
 }

@@ -5,18 +5,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.weewar.mapviewer.model.enums.Direction;
 import com.github.weewar.mapviewer.model.enums.Owner;
 import com.github.weewar.mapviewer.model.enums.TerrainType;
+import com.github.weewar.mapviewer.model.enums.UnitType;
 
 public class Tile {
     private final int x, y;
     private final TerrainType type;
     private final Owner startFaction;
     private final Direction direction;
-    private final String unit;
+    private final UnitType unit;
     private final Owner unitOwner;
 
     @JsonCreator
-    public Tile(@JsonProperty("x") int x, @JsonProperty("y") int y, @JsonProperty("type") TerrainType type, @JsonProperty("startFaction") Owner startFaction,
-                @JsonProperty("direction") Direction direction, @JsonProperty("unit") String unit, @JsonProperty("unitOwner") Owner unitOwner) {
+    public Tile(@JsonProperty("x") int x, @JsonProperty("y") int y, @JsonProperty("type") TerrainType type,
+                @JsonProperty("startFaction") Owner startFaction, @JsonProperty("direction") Direction direction,
+                @JsonProperty("unit") UnitType unit, @JsonProperty("unitOwner") Owner unitOwner) {
         this.x = x;
         this.y = y;
         this.type = type;
@@ -46,7 +48,7 @@ public class Tile {
         return direction;
     }
 
-    public String getUnit() {
+    public UnitType getUnit() {
         return unit;
     }
 
@@ -56,14 +58,14 @@ public class Tile {
 
     @Override
     public String toString() {
-        return "Tile {" +
+        return "Tile{" +
                 "x=" + x +
                 ", y=" + y +
-                ", type='" + type + '\'' +
-                ", startFaction='" + startFaction + '\'' +
-                ", direction='" + direction + '\'' +
-                ", unit='" + unit + '\'' +
-                ", unitOwner='" + unitOwner + '\'' +
+                ", type=" + type +
+                ", startFaction=" + startFaction +
+                ", direction=" + direction +
+                ", unit=" + unit +
+                ", unitOwner=" + unitOwner +
                 '}';
     }
 }

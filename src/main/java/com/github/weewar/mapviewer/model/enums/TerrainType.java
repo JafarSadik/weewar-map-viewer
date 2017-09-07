@@ -5,7 +5,7 @@ public enum TerrainType {
     bridge,
     city,
     desert,
-    foreset,
+    forest,
     harbor,
     mountain,
     plain,
