@@ -18,8 +18,8 @@ public class MapPageController {
 
     @GetMapping({"/map/{map_id}", "/map/{map_id}/{map_name}", "/map/{map_id}/{map_name}/{map_revision}"})
     public ModelAndView mapPage(@PathVariable("map_id") Integer mapId,
-                                @PathVariable(value = "map_name", required = false) String urlEncodedMapName,
-                                @PathVariable(value = "map_revision", required = false) String urlEncodedMapRevision) {
+                                @PathVariable(value = "map_revision", required = false) String urlEncodedMapRevision,
+                                @PathVariable(value = "map_name", required = false) String urlEncodedMapName) {
         return weewarMapDAO.findByMapId(mapId)
                 .map(map -> new ModelAndView("map-page", "map", map))
                 .orElseGet(() -> new ModelAndView("redirect:/search"));

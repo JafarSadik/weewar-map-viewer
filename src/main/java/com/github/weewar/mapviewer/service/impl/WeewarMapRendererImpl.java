@@ -22,11 +22,11 @@ public class WeewarMapRendererImpl implements WeewarMapRenderer {
     @Override
     public BufferedImage render(WeewarMap weewarMap) {
         Vector2D<Integer> mapImageSize = weewarMap.getSizeInPixels();
-        BufferedImage weewarMapImage = new BufferedImage(mapImageSize.getX(), mapImageSize.getY(), BufferedImage.TYPE_INT_RGB);
+        BufferedImage weewarMapImage = new BufferedImage(mapImageSize.getX(), mapImageSize.getY(), BufferedImage.TYPE_INT_ARGB);
         Graphics g = weewarMapImage.getGraphics();
 
-        // white map background
-        g.setColor(Color.WHITE);
+        // transparent map background
+        g.setColor(new Color(0, 0, 0, 0));
         g.fillRect(0, 0, mapImageSize.getX(), mapImageSize.getY());
 
         // render all tiles and units
