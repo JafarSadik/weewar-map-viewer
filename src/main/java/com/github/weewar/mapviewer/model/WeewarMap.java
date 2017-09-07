@@ -36,19 +36,19 @@ public class WeewarMap {
     }
 
     public Vector2D<Integer> hexToPixel(int column, int row) {
-        Vector2D.Mutable<Integer> point = new Vector2D.Mutable<>();
+        Vector2D<Integer> point = new Vector2D<>();
         float currentRowHorizontalOffset = (row % 2 != 0 ? HEX_HORIZONTAL_OFFSET: 0);
         point.setX(Math.round(column * HEX_WIDTH + currentRowHorizontalOffset));
         point.setY(Math.round(row * HEX_VERTICAL_DISTANCE));
-        return point.immutable();
+        return point;
     }
 
     public Vector2D<Integer> getSizeInPixels() {
-        Vector2D.Mutable<Integer> mapSize = new Vector2D.Mutable<>();
+        Vector2D<Integer> mapSize = new Vector2D<>();
         float maxHorizontalOffset = (height > 1 ? HEX_HORIZONTAL_OFFSET : 0);
         mapSize.setX(Math.round(width * HEX_WIDTH + maxHorizontalOffset));
         mapSize.setY(Math.round(HEX_HEIGHT + (height - 1) * HEX_VERTICAL_DISTANCE));
-        return mapSize.immutable();
+        return mapSize;
     }
 
     public long getMapId() {
