@@ -19,7 +19,7 @@ public class WeewarMapLoaderImpl implements WeewarMapLoader {
     @Override
     public List<WeewarMap> loadAll(String mapsLocation) {
         return ClassPath.resources(mapsLocation)
-                .parallelStream()
+                .stream()
                 .map(this::loadMap)
                 .collect(toList());
     }
