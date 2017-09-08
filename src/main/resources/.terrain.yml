@@ -1,0 +1,129 @@
+# ---------------------------------
+# Terrain images configuration file
+# ---------------------------------
+
+# airfield
+/terrain/airfield.png:
+  type:       airfield
+
+/terrain/airfield-blue.png:
+  type:       airfield
+  owner:      blue
+
+/terrain/airfield-green.png:
+  type:       airfield
+  owner:      green
+
+/terrain/airfield-purple.png:
+  type:       airfield
+  owner:      purple
+
+/terrain/airfield-red.png:
+  type:       airfield
+  owner:      red
+
+/terrain/airfield-white.png:
+  type:       airfield
+  owner:      white
+
+/terrain/airfield-yellow.png:
+  type:       airfield
+  owner:      yellow
+
+# bridge
+/terrain/bridge-ew.png:
+  type:       bridge
+  direction:  ew
+
+/terrain/bridge-nwse.png:
+  type:       bridge
+  direction:  nwse
+
+/terrain/bridge-nesw.png:
+  type:       bridge
+  direction:  nesw
+
+# city
+/terrain/city.png:
+  type:       city
+
+/terrain/city-blue.png:
+  type:       city
+  owner:      blue
+
+/terrain/city-green.png:
+  type:       city
+  owner:      green
+
+/terrain/city-purple.png:
+  type:       city
+  owner:      purple
+
+/terrain/city-red.png:
+  type:       city
+  owner:      red
+
+/terrain/city-white.png:
+  type:       city
+  owner:      white
+
+/terrain/city-yellow.png:
+  type:       city
+  owner:      yellow
+
+# desert
+/terrain/desert.png:
+  type:       desert
+
+# forest
+/terrain/forest.png:
+  type:       forest
+
+# harbor
+/terrain/harbor.png:
+  type:       harbor
+
+/terrain/harbor-blue.png:
+  type:       harbor
+  owner:      blue
+
+/terrain/harbor-green.png:
+  type:       harbor
+  owner:      green
+
+/terrain/harbor-purple.png:
+  type:       harbor
+  owner:      purple
+
+/terrain/harbor-red.png:
+  type:       harbor
+  owner:      red
+
+/terrain/harbor-white.png:
+  type:       harbor
+  owner:      white
+
+/terrain/harbor-yellow.png:
+  type:       harbor
+  owner:      yellow
+
+# mountain
+/terrain/mountain.png:
+  type:       mountain
+
+# plain
+/terrain/plain.png:
+  type:       plain
+
+# repairshop
+/terrain/repairshop.png:
+  type:       repairshop
+
+# swamp
+/terrain/swamp.png:
+  type:       swamp
+
+# water
+/terrain/water.png:
+  type:       water
+

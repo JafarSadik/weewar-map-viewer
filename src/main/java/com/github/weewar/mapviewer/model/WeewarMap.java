@@ -3,6 +3,8 @@ package com.github.weewar.mapviewer.model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Objects;
+
 import static com.github.weewar.mapviewer.model.Constants.*;
 
 public class WeewarMap {
@@ -96,17 +98,6 @@ public class WeewarMap {
 
     @Override
     public String toString() {
-        return "WeewarMap{" +
-                "mapId=" + mapId +
-                ", mapName='" + mapName + '\'' +
-                ", revision=" + revision +
-                ", creator='" + creator + '\'' +
-                ", players=" + players +
-                ", startCredits=" + startCredits +
-                ", income=" + income +
-                ", width=" + width +
-                ", height=" + height +
-                ", terrain=" + terrain +
-                '}';
+        return Objects.toString(this);
     }
 }

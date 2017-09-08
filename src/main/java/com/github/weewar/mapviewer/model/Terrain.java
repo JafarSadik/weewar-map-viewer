@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonUnwrapped;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 
@@ -37,6 +38,6 @@ public class Terrain implements Iterable<Tile> {
 
     @Override
     public String toString() {
-        return "Terrain{" + "tiles=" + tiles + '}';
+        return Objects.toString(this);
     }
 }

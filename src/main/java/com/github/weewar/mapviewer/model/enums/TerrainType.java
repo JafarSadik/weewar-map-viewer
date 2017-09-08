@@ -11,6 +11,10 @@ public enum TerrainType {
     plain,
     repairshop,
     swamp,
-    water
+    water;
+
+    public static TerrainType of(String str) {
+        return str != null ? valueOf(str) : null;
+    }
 }
 

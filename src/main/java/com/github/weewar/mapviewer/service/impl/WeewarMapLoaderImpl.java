@@ -16,13 +16,6 @@ import static java.util.stream.Collectors.toList;
 
 @Service
 public class WeewarMapLoaderImpl implements WeewarMapLoader {
-    private final ObjectMapper objectMapper;
-
-    public WeewarMapLoaderImpl() {
-        objectMapper = new ObjectMapper()
-                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-    }
-
     @Override
     public List<WeewarMap> loadAll(String mapsLocation) {
         return ClassPath.resources(mapsLocation)
@@ -33,7 +26,8 @@ public class WeewarMapLoaderImpl implements WeewarMapLoader {
 
     private WeewarMap loadMap(Resource resource) throws MapParseException {
         try {
-            return objectMapper.readValue(resource.getURL(), WeewarMap.class);
+            ObjectMapper jsonMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            return jsonMapper.readValue(resource.getURL(), WeewarMap.class);
         } catch (IOException e) {
             throw new MapParseException("Failed to parse json map file: " + resource.getFilename(), e);
         }

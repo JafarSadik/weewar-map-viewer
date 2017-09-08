@@ -19,5 +19,9 @@ public enum UnitType {
     speedboat,
     sub,
     tank,
-    trooper
+    trooper;
+
+    public static UnitType of(String str) {
+        return str != null ? valueOf(str) : null;
+    }
 }

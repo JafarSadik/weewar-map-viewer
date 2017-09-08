@@ -36,13 +36,12 @@ public class WeewarMapRendererImpl implements WeewarMapRenderer {
             Vector2D<Integer> imageLocation = weewarMap.hexToPixel(tile.getX(), tile.getY());
             // render terrain and buildings
             Image terrain = images.getTerrain(tile.getType(), tile.getStartFaction(), tile.getDirection());
-            if (terrain != null) {
-                g.drawImage(terrain, imageLocation.getX(), imageLocation.getY(), null);
-            }
+            g.drawImage(terrain, imageLocation.getX(), imageLocation.getY(), null);
 
             // render units
-            Image unit = images.getUnit(tile.getUnit(), tile.getUnitOwner());
-            if (unit != null) {
+            boolean unitExists = tile.getUnit() != null;
+            if (unitExists) {
+                Image unit = images.getUnit(tile.getUnit(), tile.getUnitOwner());
                 g.drawImage(unit, imageLocation.getX(), imageLocation.getY(), null);
             }
         }

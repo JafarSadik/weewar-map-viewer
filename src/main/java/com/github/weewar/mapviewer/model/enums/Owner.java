@@ -6,5 +6,9 @@ public enum Owner {
     purple,
     yellow,
     green,
-    white
+    white;
+
+    public static Owner of(String str) {
+        return str != null ? valueOf(str) : null;
+    }
 }
