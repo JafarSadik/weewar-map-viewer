@@ -31,8 +31,8 @@ public class ImageRepositoryImpl implements ImageRepository {
     public Image getTerrain(TerrainType terrainType, Owner owner, Direction direction) throws ImageNotFoundException {
         Image image = terrainImages.get(new TerrainImageKey(terrainType, owner, direction));
         if (image == null) {
-            throw new ImageNotFoundException("Terrain image not found: {type: " + terrainType + ", owner: " + owner +
-                    ", direction: " + direction + "}");
+            throw new ImageNotFoundException("Terrain image not found: type = " + terrainType + ", owner = " + owner +
+                    ", direction = " + direction);
         }
         return image;
     }
@@ -41,7 +41,7 @@ public class ImageRepositoryImpl implements ImageRepository {
     public Image getUnit(UnitType unitType, Owner owner) throws ImageNotFoundException {
         Image image = unitImages.get(new UnitImageKey(unitType, owner));
         if (image == null) {
-            throw new ImageNotFoundException("Unit image not found: {type: " + unitType + ", owner: " + owner + "}");
+            throw new ImageNotFoundException("Unit image not found: type = " + unitType + ", owner = " + owner);
         }
         return image;
     }
