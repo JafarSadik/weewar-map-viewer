@@ -1,0 +1,479 @@
+# ---------------------------------
+# Unit images configuration file
+# ---------------------------------
+
+# anti aircraft
+/units/aa-blue.png:
+  type:   antiAircraft
+  owner:  blue
+
+/units/aa-green.png:
+  type:   antiAircraft
+  owner:  green
+
+/units/aa-purple.png:
+  type:   antiAircraft
+  owner:  purple
+
+/units/aa-red.png:
+  type:   antiAircraft
+  owner:  red
+
+/units/aa-white.png:
+  type:   antiAircraft
+  owner:  white
+
+/units/aa-yellow.png:
+  type:   antiAircraft
+  owner:  yellow
+
+# assault artillery
+/units/assault-artillery-blue.png:
+  type:   assaultArtillery
+  owner:  blue
+
+/units/assault-artillery-green.png:
+  type:   assaultArtillery
+  owner:  green
+
+/units/assault-artillery-purple.png:
+  type:   assaultArtillery
+  owner:  purple
+
+/units/assault-artillery-red.png:
+  type:   assaultArtillery
+  owner:  red
+
+/units/assault-artillery-white.png:
+  type:   assaultArtillery
+  owner:  white
+
+/units/assault-artillery-yellow.png:
+  type:   assaultArtillery
+  owner:  yellow
+
+# battleship
+/units/battleship-blue.png:
+  type:   battleship
+  owner:  blue
+
+/units/battleship-green.png:
+  type:   battleship
+  owner:  green
+
+/units/battleship-purple.png:
+  type:   battleship
+  owner:  purple
+
+/units/battleship-red.png:
+  type:   battleship
+  owner:  red
+
+/units/battleship-white.png:
+  type:   battleship
+  owner:  white
+
+/units/battleship-yellow.png:
+  type:   battleship
+  owner:  yellow
+
+# berserker
+/units/berserker-blue.png:
+  type:   berserker
+  owner:  blue
+
+/units/berserker-green.png:
+  type:   berserker
+  owner:  green
+
+/units/berserker-purple.png:
+  type:   berserker
+  owner:  purple
+
+/units/berserker-red.png:
+  type:   berserker
+  owner:  red
+
+/units/berserker-white.png:
+  type:   berserker
+  owner:  white
+
+/units/berserker-yellow.png:
+  type:   berserker
+  owner:  yellow
+
+# bomber
+/units/bomber-blue.png:
+  type:   bomber
+  owner:  blue
+
+/units/bomber-green.png:
+  type:   bomber
+  owner:  green
+
+/units/bomber-purple.png:
+  type:   bomber
+  owner:  purple
+
+/units/bomber-red.png:
+  type:   bomber
+  owner:  red
+
+/units/bomber-white.png:
+  type:   bomber
+  owner:  white
+
+/units/bomber-yellow.png:
+  type:   bomber
+  owner:  yellow
+
+# destroyer
+/units/destroyer-blue.png:
+  type:   destroyer
+  owner:  blue
+
+/units/destroyer-green.png:
+  type:   destroyer
+  owner:  green
+
+/units/destroyer-purple.png:
+  type:   destroyer
+  owner:  purple
+
+/units/destroyer-red.png:
+  type:   destroyer
+  owner:  red
+
+/units/destroyer-white.png:
+  type:   destroyer
+  owner:  white
+
+/units/destroyer-yellow.png:
+  type:   destroyer
+  owner:  yellow
+
+# DFA
+/units/dfa-blue.png:
+  type:   dfa
+  owner:  blue
+
+/units/dfa-green.png:
+  type:   dfa
+  owner:  green
+
+/units/dfa-purple.png:
+  type:   dfa
+  owner:  purple
+
+/units/dfa-red.png:
+  type:   dfa
+  owner:  red
+
+/units/dfa-white.png:
+  type:   dfa
+  owner:  white
+
+/units/dfa-yellow.png:
+  type:   dfa
+  owner:  yellow
+
+# heavy artillery
+/units/heavy-artillery-blue.png:
+  type:   heavyArtillery
+  owner:  blue
+
+/units/heavy-artillery-green.png:
+  type:   heavyArtillery
+  owner:  green
+
+/units/heavy-artillery-purple.png:
+  type:   heavyArtillery
+  owner:  purple
+
+/units/heavy-artillery-red.png:
+  type:   heavyArtillery
+  owner:  red
+
+/units/heavy-artillery-white.png:
+  type:   heavyArtillery
+  owner:  white
+
+/units/heavy-artillery-yellow.png:
+  type:   heavyArtillery
+  owner:  yellow
+
+# heavy tank
+/units/heavy-tank-blue.png:
+  type:   heavyTank
+  owner:  blue
+
+/units/heavy-tank-green.png:
+  type:   heavyTank
+  owner:  green
+
+/units/heavy-tank-purple.png:
+  type:   heavyTank
+  owner:  purple
+
+/units/heavy-tank-red.png:
+  type:   heavyTank
+  owner:  red
+
+/units/heavy-tank-white.png:
+  type:   heavyTank
+  owner:  white
+
+/units/heavy-tank-yellow.png:
+  type:   heavyTank
+  owner:  yellow
+
+# heavy trooper
+/units/heavy-trooper-blue.png:
+  type:   heavyTrooper
+  owner:  blue
+
+/units/heavy-trooper-green.png:
+  type:   heavyTrooper
+  owner:  green
+
+/units/heavy-trooper-purple.png:
+  type:   heavyTrooper
+  owner:  purple
+
+/units/heavy-trooper-red.png:
+  type:   heavyTrooper
+  owner:  red
+
+/units/heavy-trooper-white.png:
+  type:   heavyTrooper
+  owner:  white
+
+/units/heavy-trooper-yellow.png:
+  type:   heavyTrooper
+  owner:  yellow
+
+# helicopter
+/units/helicopter-blue.png:
+  type:   helicopter
+  owner:  blue
+
+/units/helicopter-green.png:
+  type:   helicopter
+  owner:  green
+
+/units/helicopter-purple.png:
+  type:   helicopter
+  owner:  purple
+
+/units/helicopter-red.png:
+  type:   helicopter
+  owner:  red
+
+/units/helicopter-white.png:
+  type:   helicopter
+  owner:  white
+
+/units/helicopter-yellow.png:
+  type:   helicopter
+  owner:  yellow
+
+# hovercraft
+/units/hovercraft-blue.png:
+  type:   hovercraft
+  owner:  blue
+
+/units/hovercraft-green.png:
+  type:   hovercraft
+  owner:  green
+
+/units/hovercraft-purple.png:
+  type:   hovercraft
+  owner:  purple
+
+/units/hovercraft-red.png:
+  type:   hovercraft
+  owner:  red
+
+/units/hovercraft-white.png:
+  type:   hovercraft
+  owner:  white
+
+/units/hovercraft-yellow.png:
+  type:   hovercraft
+  owner:  yellow
+
+# jet
+/units/jet-blue.png:
+  type:   jet
+  owner:  blue
+
+/units/jet-green.png:
+  type:   jet
+  owner:  green
+
+/units/jet-purple.png:
+  type:   jet
+  owner:  purple
+
+/units/jet-red.png:
+  type:   jet
+  owner:  red
+
+/units/jet-white.png:
+  type:   jet
+  owner:  white
+
+/units/jet-yellow.png:
+  type:   jet
+  owner:  yellow
+
+# light artillery
+/units/light-artillery-blue.png:
+  type:   lightArtillery
+  owner:  blue
+
+/units/light-artillery-green.png:
+  type:   lightArtillery
+  owner:  green
+
+/units/light-artillery-purple.png:
+  type:   lightArtillery
+  owner:  purple
+
+/units/light-artillery-red.png:
+  type:   lightArtillery
+  owner:  red
+
+/units/light-artillery-white.png:
+  type:   lightArtillery
+  owner:  white
+
+/units/light-artillery-yellow.png:
+  type:   lightArtillery
+  owner:  yellow
+
+# tank
+/units/tank-blue.png:
+  type:   tank
+  owner:  blue
+
+/units/tank-green.png:
+  type:   tank
+  owner:  green
+
+/units/tank-purple.png:
+  type:   tank
+  owner:  purple
+
+/units/tank-red.png:
+  type:   tank
+  owner:  red
+
+/units/tank-white.png:
+  type:   tank
+  owner:  white
+
+/units/tank-yellow.png:
+  type:   tank
+  owner:  yellow
+
+# sub
+/units/sub-blue.png:
+  type:   sub
+  owner:  blue
+
+/units/sub-green.png:
+  type:   sub
+  owner:  green
+
+/units/sub-purple.png:
+  type:   sub
+  owner:  purple
+
+/units/sub-red.png:
+  type:   sub
+  owner:  red
+
+/units/sub-white.png:
+  type:   sub
+  owner:  white
+
+/units/sub-yellow.png:
+  type:   sub
+  owner:  yellow
+
+# raider
+/units/raider-blue.png:
+  type:   raider
+  owner:  blue
+
+/units/raider-green.png:
+  type:   raider
+  owner:  green
+
+/units/raider-purple.png:
+  type:   raider
+  owner:  purple
+
+/units/raider-red.png:
+  type:   raider
+  owner:  red
+
+/units/raider-white.png:
+  type:   raider
+  owner:  white
+
+/units/raider-yellow.png:
+  type:   raider
+  owner:  yellow
+
+# trooper
+/units/trooper-blue.png:
+  type:   trooper
+  owner:  blue
+
+/units/trooper-green.png:
+  type:   trooper
+  owner:  green
+
+/units/trooper-purple.png:
+  type:   trooper
+  owner:  purple
+
+/units/trooper-red.png:
+  type:   trooper
+  owner:  red
+
+/units/trooper-white.png:
+  type:   trooper
+  owner:  white
+
+/units/trooper-yellow.png:
+  type:   trooper
+  owner:  yellow
+
+# speedboat
+/units/speedboat-blue.png:
+  type:   speedboat
+  owner:  blue
+
+/units/speedboat-green.png:
+  type:   speedboat
+  owner:  green
+
+/units/speedboat-purple.png:
+  type:   speedboat
+  owner:  purple
+
+/units/speedboat-red.png:
+  type:   speedboat
+  owner:  red
+
+/units/speedboat-white.png:
+  type:   speedboat
+  owner:  white
+
+/units/speedboat-yellow.png:
+  type:   speedboat
+  owner:  yellow
+
