@@ -45,4 +45,9 @@ public final class TerrainImageKey {
                 Objects.equals(this.terrainType, that.terrainType) &&
                 Objects.equals(this.direction, that.direction);
     }
+
+    @Override
+    public String toString() {
+        return Objects.toString(this);
+    }
 }

@@ -1,15 +1,23 @@
 package com.github.weewar.mapviewer.service.impl;
 
+import com.github.weewar.mapviewer.exceptions.ImageNotFoundException;
+import com.github.weewar.mapviewer.exceptions.ImageResizeException;
 import com.github.weewar.mapviewer.model.Tile;
 import com.github.weewar.mapviewer.model.Vector2D;
 import com.github.weewar.mapviewer.model.WeewarMap;
 import com.github.weewar.mapviewer.service.ImageRepository;
 import com.github.weewar.mapviewer.service.WeewarMapRenderer;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.resizers.configurations.AlphaInterpolation;
+import net.coobird.thumbnailator.resizers.configurations.Antialiasing;
+import net.coobird.thumbnailator.resizers.configurations.Dithering;
+import net.coobird.thumbnailator.resizers.configurations.Rendering;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 @Service
 public class WeewarMapRendererImpl implements WeewarMapRenderer {
@@ -21,7 +29,7 @@ public class WeewarMapRendererImpl implements WeewarMapRenderer {
     }
 
     @Override
-    public BufferedImage render(WeewarMap weewarMap) {
+    public BufferedImage render(WeewarMap weewarMap) throws ImageNotFoundException {
         // create empty image of a proper size
         Vector2D<Integer> imageSize = weewarMap.getSizeInPixels();
         BufferedImage weewarMapImage = new BufferedImage(imageSize.getX(), imageSize.getY(), BufferedImage.TYPE_INT_ARGB);
@@ -46,5 +54,23 @@ public class WeewarMapRendererImpl implements WeewarMapRenderer {
             }
         }
         return weewarMapImage;
+    }
+
+    @Override
+    public BufferedImage renderThumbnail(WeewarMap weewarMap, int width, int height) throws ImageNotFoundException, ImageResizeException {
+        BufferedImage weewarMapImage = render(weewarMap);
+        try {
+            return Thumbnails.of(weewarMapImage)
+                    .size(width, height)
+                    .alphaInterpolation(AlphaInterpolation.QUALITY)
+                    .antialiasing(Antialiasing.ON)
+                    .dithering(Dithering.DEFAULT)
+                    .rendering(Rendering.QUALITY)
+                    .keepAspectRatio(true)
+                    .outputQuality(1.0)
+                    .asBufferedImage();
+        } catch (IOException e) {
+            throw new ImageResizeException(e);
+        }
     }
 }

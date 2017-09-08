@@ -37,4 +37,9 @@ public final class UnitImageKey {
         return Objects.equals(this.owner, that.owner) &&
                 Objects.equals(this.unitType, that.unitType);
     }
+
+    @Override
+    public String toString() {
+        return Objects.toString(this);
+    }
 }
