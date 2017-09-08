@@ -22,8 +22,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class ImageRepositoryImpl implements ImageRepository {
-    private final Map<TerrainImageKey, Image> terrainImages = new ConcurrentHashMap<>();
-    private final Map<UnitImageKey, Image> unitImages = new ConcurrentHashMap<>();
+    private final Map<TerrainImageKey, Image> terrainImages = new ConcurrentHashMap<>(50 /*max terrain images*/,
+            0.75f /*default load factor*/, 1 /*single shard*/);
+    private final Map<UnitImageKey, Image> unitImages = new ConcurrentHashMap<>(200 /*max unit images*/,
+            0.75f /*default load factor*/, 1 /*single shard*/);
 
     @Override
     public Image getTerrain(TerrainType terrainType, Owner owner, Direction direction) throws ImageNotFoundException {
