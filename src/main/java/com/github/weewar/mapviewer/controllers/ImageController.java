@@ -31,11 +31,30 @@ public class ImageController {
                 .orElse(notFoundError());
     }
 
+    @GetMapping(value = "/images/maps/thumbnails/{map_id}")
+    public ResponseEntity<byte[]> renderMapThumbnail(@PathVariable("map_id") Integer mapId) {
+        return weewarMapDAO.findByMapId(mapId)
+                .map(this::weewarMapPNGThumbnail)
+                .orElse(notFoundError());
+    }
+
     private ResponseEntity<byte[]> weewarMapPNGImage(WeewarMap weewarMap) {
         BufferedImage image = weewarMapRenderer.render(weewarMap);
+        byte[] pngData = Images.toPNG(image);
         return ResponseEntity.ok()
                 .contentType(MediaType.IMAGE_PNG)
-                .body(Images.toPNG(image));
+                .contentLength(pngData.length)
+                .body(pngData);
+    }
+
+    private ResponseEntity<byte[]> weewarMapPNGThumbnail(WeewarMap weewarMap) {
+        int thumbnailWidth = 180, thumbnailHeight = 140;
+        BufferedImage thumbnail = weewarMapRenderer.renderThumbnail(weewarMap, thumbnailWidth, thumbnailHeight);
+        byte[] pngData = Images.toPNG(thumbnail);
+        return ResponseEntity.ok()
+                .contentType(MediaType.IMAGE_PNG)
+                .contentLength(pngData.length)
+                .body(pngData);
     }
 
     private ResponseEntity<byte[]> notFoundError() {

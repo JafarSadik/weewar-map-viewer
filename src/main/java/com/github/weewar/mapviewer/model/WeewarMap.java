@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 
-import static com.github.weewar.mapviewer.model.Constants.*;
+import static com.github.weewar.mapviewer.model.MapConstants.*;
 
 public class WeewarMap {
     private final long mapId;
