@@ -2,10 +2,16 @@ package com.github.weewar.mapviewer.controllers;
 
 import com.github.weewar.mapviewer.dao.WeewarMapDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 public class MapPageController {
@@ -23,5 +29,12 @@ public class MapPageController {
         return weewarMapDAO.findByMapId(mapId)
                 .map(map -> new ModelAndView("map-page", "map", map))
                 .orElseGet(() -> new ModelAndView("redirect:/search"));
+    }
+
+    @ResponseBody
+    @GetMapping(value = {"/api/maps"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Integer> getMaps(@RequestParam(value = "page", required = false, defaultValue = "0") Integer pageNumber,
+                                 @RequestParam(value = "items", required = false, defaultValue = "50") Integer itemsPerPage) {
+        return Arrays.asList(1, 2, 3, 4, 5);
     }
 }

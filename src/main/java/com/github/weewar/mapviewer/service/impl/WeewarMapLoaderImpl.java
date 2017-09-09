@@ -42,7 +42,7 @@ public class WeewarMapLoaderImpl implements WeewarMapLoader {
 
     private WeewarMap loadMap(URL url) throws MapParseException {
         try {
-            return jsonMapper.readValue(url, WeewarMap.class);
+            return jsonMapper.readValue(url, WeewarMap.Mutable.class).immutable();
         } catch (IOException e) {
             throw new MapParseException("Failed to parse json map file: " + url.getFile(), e);
         }

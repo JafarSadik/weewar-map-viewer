@@ -1,4 +1,4 @@
-package com.github.weewar.mapviewer.dao.classpath;
+package com.github.weewar.mapviewer.dao.memory;
 
 import com.github.weewar.mapviewer.dao.WeewarMapDAO;
 import com.github.weewar.mapviewer.model.WeewarMap;
@@ -11,12 +11,12 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public class ClassPathWeewarMapDAO implements WeewarMapDAO {
-    private final Logger logger = LoggerFactory.getLogger(ClassPathWeewarMapDAO.class);
+public class InMemoryWeewarMapDAO implements WeewarMapDAO {
+    private final Logger logger = LoggerFactory.getLogger(InMemoryWeewarMapDAO.class);
     private final WeewarMapLoader weewarMapLoader;
 
     @Autowired
-    public ClassPathWeewarMapDAO(WeewarMapLoader weewarMapLoader) {
+    public InMemoryWeewarMapDAO(WeewarMapLoader weewarMapLoader) {
         this.weewarMapLoader = weewarMapLoader;
     }
 
@@ -29,5 +29,10 @@ public class ClassPathWeewarMapDAO implements WeewarMapDAO {
             logger.info("Map not found: id = " + mapId);
             return Optional.empty();
         }
+    }
+
+    public void populate() {
+        //List<WeewarMap> loadedMaps = weewarMapLoader.loadAll("/public/api/maps/*");
+        //weewarMaps.putAll(loadedMaps.stream().collect(toMap(WeewarMap::getMapId, map -> map)));
     }
 }

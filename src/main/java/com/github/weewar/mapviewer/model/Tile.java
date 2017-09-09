@@ -60,6 +60,14 @@ public class Tile {
 
     @Override
     public String toString() {
-        return Objects.toString(this);
+        return "Tile{" +
+                "x=" + x +
+                ", y=" + y +
+                ", type=" + type +
+                ", startFaction=" + startFaction +
+                ", direction=" + direction +
+                ", unit=" + unit +
+                ", unitOwner=" + unitOwner +
+                '}';
     }
 }
