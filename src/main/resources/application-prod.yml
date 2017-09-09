@@ -1,5 +1,9 @@
 # ---------------------------------
 # Production environment configuration
 # ---------------------------------
+spring:
+  thymeleaf:
+    cache: true
+
 logging:
   level: info
