@@ -2,6 +2,7 @@ package com.github.weewar.mapviewer.service.impl;
 
 import com.github.weewar.mapviewer.exceptions.ImageNotFoundException;
 import com.github.weewar.mapviewer.exceptions.ImagePreloadException;
+import com.github.weewar.mapviewer.model.AppPaths;
 import com.github.weewar.mapviewer.model.enums.Direction;
 import com.github.weewar.mapviewer.model.enums.Owner;
 import com.github.weewar.mapviewer.model.enums.TerrainType;
@@ -59,7 +60,7 @@ public class ImageRepositoryImpl implements ImageRepository {
 
     @SuppressWarnings("unchecked")
     private void preloadTerrainImages(Yaml yaml) throws IOException {
-        try (InputStream inputStream = getClass().getResourceAsStream("/terrain.yml")) {
+        try (InputStream inputStream = getClass().getResourceAsStream(AppPaths.terrainImages)) {
             Map<String, Map<String, String>> terrainFiles = yaml.loadAs(inputStream, Map.class);
             for (String terrainFile : terrainFiles.keySet()) {
                 Map<String, String> terrainDetails = terrainFiles.get(terrainFile);
@@ -75,7 +76,7 @@ public class ImageRepositoryImpl implements ImageRepository {
 
     @SuppressWarnings("unchecked")
     private void preloadUnitImages(Yaml yaml) throws IOException {
-        try (InputStream inputStream = getClass().getResourceAsStream("/units.yml")) {
+        try (InputStream inputStream = getClass().getResourceAsStream(AppPaths.unitImages)) {
             Map<String, Map<String, String>> unitFiles = yaml.loadAs(inputStream, Map.class);
             for (String unitFile : unitFiles.keySet()) {
                 Map<String, String> unitDetails = unitFiles.get(unitFile);

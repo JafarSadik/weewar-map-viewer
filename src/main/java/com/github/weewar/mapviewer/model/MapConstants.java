@@ -1,8 +1,10 @@
 package com.github.weewar.mapviewer.model;
 
 public interface MapConstants {
-    int HEX_WIDTH = 32;  //pixels
-    int HEX_HEIGHT = 34; //pixels
-    float HEX_HORIZONTAL_OFFSET = 0.5f * HEX_WIDTH; //pixels
-    float HEX_VERTICAL_DISTANCE = 0.7647f * HEX_HEIGHT; //pixels
+    int hexWidth = 32;
+    int hexHeight = 34;
+    float hexHorizontalOffset = 0.5f * hexWidth;
+    float hexVerticalDistance = 0.7647f * hexHeight;
+    int thumbnailWidth = 180;
+    int thumbnailHeight = 140;
 }

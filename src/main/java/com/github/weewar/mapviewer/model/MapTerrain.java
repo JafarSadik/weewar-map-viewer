@@ -5,15 +5,14 @@ import com.fasterxml.jackson.annotation.JsonUnwrapped;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 
-public class Terrain implements Iterable<Tile> {
+public class MapTerrain implements Iterable<Tile> {
     private final List<Tile> tiles;
 
     @JsonCreator
-    public Terrain(@JsonUnwrapped List<Tile> tiles) {
+    public MapTerrain(@JsonUnwrapped List<Tile> tiles) {
         this.tiles = tiles;
     }
 
@@ -38,6 +37,6 @@ public class Terrain implements Iterable<Tile> {
 
     @Override
     public String toString() {
-        return Objects.toString(this);
+        return "MapTerrain{" + "tiles=" + tiles + '}';
     }
 }

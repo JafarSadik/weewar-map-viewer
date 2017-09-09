@@ -48,6 +48,10 @@ public final class TerrainImageKey {
 
     @Override
     public String toString() {
-        return Objects.toString(this);
+        return "TerrainImageKey{" +
+                "terrainType=" + terrainType +
+                ", owner=" + owner +
+                ", direction=" + direction +
+                '}';
     }
 }

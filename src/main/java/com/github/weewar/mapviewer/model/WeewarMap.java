@@ -1,103 +1,62 @@
 package com.github.weewar.mapviewer.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.util.Objects;
-
-import static com.github.weewar.mapviewer.model.MapConstants.*;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 
 public class WeewarMap {
-    private final long mapId;
-    private final String mapName;
-    private final int revision;
-    private final String creator;
-    private final int players;
-    private final int startCredits;
-    private final int income;
-    private final int width;
-    private final int height;
-    private final Terrain terrain;
+    protected MapHeader header;
+    protected MapTerrain terrain;
 
-    @JsonCreator
-    public WeewarMap(@JsonProperty("id") long mapId, @JsonProperty("name") String mapName, @JsonProperty("revision") int revision,
-                     @JsonProperty("creator") String creator, @JsonProperty("players") int players, @JsonProperty("width") int width,
-                     @JsonProperty("perBaseCredits") int income, @JsonProperty("initialCredits") int startCredits,
-                     @JsonProperty("height") int height, @JsonProperty("terrain") Terrain terrain) {
-        this.mapId = mapId;
-        this.mapName = mapName;
-        this.revision = revision;
-        this.creator = creator;
-        this.players = players;
-        this.startCredits = startCredits;
-        this.income = income;
-        this.width = width;
-        this.height = height;
+    public WeewarMap(MapHeader header, MapTerrain terrain) {
+        this.header = header;
         this.terrain = terrain;
     }
 
     public Vector2D<Integer> getSize() {
-        return new Vector2D<>(width, height);
+        return header.getSize();
     }
 
     public Vector2D<Integer> hexToPixel(int column, int row) {
-        Vector2D<Integer> point = new Vector2D<>();
-        float rowHorizontalOffset = (row % 2 != 0 ? HEX_HORIZONTAL_OFFSET : 0);
-        point.setX(Math.round(column * HEX_WIDTH + rowHorizontalOffset));
-        point.setY(Math.round(row * HEX_VERTICAL_DISTANCE));
-        return point;
+        return header.hexToPixel(column, row);
     }
 
     public Vector2D<Integer> getSizeInPixels() {
-        Vector2D<Integer> mapSize = new Vector2D<>();
-        float maxHorizontalOffset = (height > 1 ? HEX_HORIZONTAL_OFFSET : 0);
-        mapSize.setX(Math.round(width * HEX_WIDTH + maxHorizontalOffset));
-        mapSize.setY(Math.round(HEX_HEIGHT + (height - 1) * HEX_VERTICAL_DISTANCE));
-        return mapSize;
+        return header.getSizeInPixels();
     }
 
-    public long getMapId() {
-        return mapId;
+    public MapHeader getHeader() {
+        return header;
     }
 
-    public String getMapName() {
-        return mapName;
-    }
-
-    public int getRevision() {
-        return revision;
-    }
-
-    public String getCreator() {
-        return creator;
-    }
-
-    public int getPlayers() {
-        return players;
-    }
-
-    public int getStartCredits() {
-        return startCredits;
-    }
-
-    public int getIncome() {
-        return income;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public Terrain getTerrain() {
+    public MapTerrain getTerrain() {
         return terrain;
     }
 
     @Override
     public String toString() {
-        return Objects.toString(this);
+        return "WeewarMap{" +
+                "header=" + header +
+                ", terrain=" + terrain +
+                '}';
+    }
+
+    public static class Mutable extends WeewarMap {
+        public Mutable() {
+            super(null, null);
+        }
+
+        @JsonUnwrapped
+        public void setMapHeader(MapHeader mapHeader) {
+            super.header = mapHeader;
+        }
+
+        @JsonProperty("terrain")
+        public void setTerrain(MapTerrain terrain) {
+            super.terrain = terrain;
+        }
+
+        public WeewarMap immutable() {
+            return new WeewarMap(header, terrain);
+        }
     }
 }

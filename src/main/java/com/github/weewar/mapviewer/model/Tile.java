@@ -7,8 +7,6 @@ import com.github.weewar.mapviewer.model.enums.Owner;
 import com.github.weewar.mapviewer.model.enums.TerrainType;
 import com.github.weewar.mapviewer.model.enums.UnitType;
 
-import java.util.Objects;
-
 public class Tile {
     private final int x, y;
     private final TerrainType type;
@@ -60,6 +58,14 @@ public class Tile {
 
     @Override
     public String toString() {
-        return Objects.toString(this);
+        return "Tile{" +
+                "x=" + x +
+                ", y=" + y +
+                ", type=" + type +
+                ", startFaction=" + startFaction +
+                ", direction=" + direction +
+                ", unit=" + unit +
+                ", unitOwner=" + unitOwner +
+                '}';
     }
 }

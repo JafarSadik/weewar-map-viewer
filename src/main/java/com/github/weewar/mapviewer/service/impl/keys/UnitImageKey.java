@@ -40,6 +40,9 @@ public final class UnitImageKey {
 
     @Override
     public String toString() {
-        return Objects.toString(this);
+        return "UnitImageKey{" +
+                "unitType=" + unitType +
+                ", owner=" + owner +
+                '}';
     }
 }
