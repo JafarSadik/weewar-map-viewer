@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.awt.image.BufferedImage;
 
+import static com.github.weewar.mapviewer.model.MapConstants.thumbnailHeight;
+import static com.github.weewar.mapviewer.model.MapConstants.thumbnailWidth;
+
 @Controller
 public class ImageController {
     private final WeewarMapRenderer weewarMapRenderer;
@@ -26,14 +29,14 @@ public class ImageController {
 
     @GetMapping(value = "/images/maps/{map_id}", produces = MediaType.IMAGE_PNG_VALUE)
     public ResponseEntity<byte[]> renderWeewarMap(@PathVariable("map_id") Integer mapId) {
-        return weewarMapDAO.findByMapId(mapId)
+        return weewarMapDAO.getMapById(mapId)
                 .map(this::weewarMapPNGImage)
                 .orElse(notFoundError());
     }
 
     @GetMapping(value = "/images/maps/thumbnails/{map_id}")
     public ResponseEntity<byte[]> renderMapThumbnail(@PathVariable("map_id") Integer mapId) {
-        return weewarMapDAO.findByMapId(mapId)
+        return weewarMapDAO.getMapById(mapId)
                 .map(this::weewarMapPNGThumbnail)
                 .orElse(notFoundError());
     }
@@ -48,7 +51,6 @@ public class ImageController {
     }
 
     private ResponseEntity<byte[]> weewarMapPNGThumbnail(WeewarMap weewarMap) {
-        int thumbnailWidth = 180, thumbnailHeight = 140;
         BufferedImage thumbnail = weewarMapRenderer.renderThumbnail(weewarMap, thumbnailWidth, thumbnailHeight);
         byte[] pngData = Images.toPNG(thumbnail);
         return ResponseEntity.ok()

@@ -7,7 +7,7 @@ import static com.github.weewar.mapviewer.model.MapConstants.*;
 
 
 public class MapHeader {
-    private final long mapId;
+    private final int mapId;
     private final String mapName;
     private final int revision;
     private final String creator;
@@ -18,7 +18,7 @@ public class MapHeader {
     private final int height;
 
     @JsonCreator
-    public MapHeader(@JsonProperty("id") long mapId, @JsonProperty("name") String mapName, @JsonProperty("revision") int revision,
+    public MapHeader(@JsonProperty("id") int mapId, @JsonProperty("name") String mapName, @JsonProperty("revision") int revision,
                      @JsonProperty("creator") String creator, @JsonProperty("players") int players, @JsonProperty("width") int width,
                      @JsonProperty("perBaseCredits") int income, @JsonProperty("initialCredits") int startCredits,
                      @JsonProperty("height") int height) {
@@ -39,21 +39,21 @@ public class MapHeader {
 
     public Vector2D<Integer> hexToPixel(int column, int row) {
         Vector2D<Integer> point = new Vector2D<>();
-        float rowHorizontalOffset = (row % 2 != 0 ? HEX_HORIZONTAL_OFFSET : 0);
-        point.setX(Math.round(column * HEX_WIDTH + rowHorizontalOffset));
-        point.setY(Math.round(row * HEX_VERTICAL_DISTANCE));
+        float rowHorizontalOffset = (row % 2 != 0 ? hexHorizontalOffset : 0);
+        point.setX(Math.round(column * hexWidth + rowHorizontalOffset));
+        point.setY(Math.round(row * hexVerticalDistance));
         return point;
     }
 
     public Vector2D<Integer> getSizeInPixels() {
         Vector2D<Integer> mapSize = new Vector2D<>();
-        float maxHorizontalOffset = (height > 1 ? HEX_HORIZONTAL_OFFSET : 0);
-        mapSize.setX(Math.round(width * HEX_WIDTH + maxHorizontalOffset));
-        mapSize.setY(Math.round(HEX_HEIGHT + (height - 1) * HEX_VERTICAL_DISTANCE));
+        float maxHorizontalOffset = (height > 1 ? hexHorizontalOffset : 0);
+        mapSize.setX(Math.round(width * hexWidth + maxHorizontalOffset));
+        mapSize.setY(Math.round(hexHeight + (height - 1) * hexVerticalDistance));
         return mapSize;
     }
 
-    public long getMapId() {
+    public int getMapId() {
         return mapId;
     }
 

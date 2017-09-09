@@ -26,15 +26,15 @@ public class MapPageController {
     public ModelAndView mapPage(@PathVariable("map_id") Integer mapId,
                                 @PathVariable(value = "map_revision", required = false) String urlEncodedMapRevision,
                                 @PathVariable(value = "map_name", required = false) String urlEncodedMapName) {
-        return weewarMapDAO.findByMapId(mapId)
-                .map(map -> new ModelAndView("map-page", "map", map))
+        return weewarMapDAO.getMapHeaderById(mapId)
+                .map(mapHeader -> new ModelAndView("map-page", "map", mapHeader))
                 .orElseGet(() -> new ModelAndView("redirect:/search"));
     }
 
     @ResponseBody
     @GetMapping(value = {"/api/maps"}, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Integer> getMaps(@RequestParam(value = "page", required = false, defaultValue = "0") Integer pageNumber,
-                                 @RequestParam(value = "items", required = false, defaultValue = "50") Integer itemsPerPage) {
+                                 @RequestParam(value = "size", required = false, defaultValue = "50") Integer pageSize) {
         return Arrays.asList(1, 2, 3, 4, 5);
     }
 }
