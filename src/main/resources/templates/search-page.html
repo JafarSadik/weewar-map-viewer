@@ -4,199 +4,22 @@
 <head>
     <title>Search archived weewar maps</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-
-    <style>
-        span {
-            width: 180px;
-            height: 140px;
-            display: block;
-            float: left;
-            padding: 5px;
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/css/mapviewer.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+    <script src="/js/mapviewer.js"></script>
 </head>
 
 <body>
-<span>
-    <a href="#" th:href="@{~/map/1/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/1.png}"/></a>
-</span>
+<script id="map-box-template" type="text/template">
+    <div id="map_{{mapId}}" class="map-box">
+        <a href="/map/{{mapId}}/{{revision}}/{{urlEncodedMapName}}"><img src="/images/maps/thumbnails/{{mapId}}.png"/></a>
+    </div>
+</script>
 
-<span>
-    <a href="#" th:href="@{~/map/2/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/2.png}"/></a>
-</span>
+<div id="map-box-container">
 
-<span>
-    <a href="#" th:href="@{~/map/3/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/3.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/4/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/4.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/5/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/5.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/6/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/6.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/7/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/7.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/8/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/8.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/9/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/9.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/11/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/11.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/12/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/12.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/13/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/13.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/14/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/14.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/15/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/15.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/16/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/16.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/17/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/17.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/32/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/32.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/1745/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/1745.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/1746/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/1746.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/1747/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/1747.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/5176/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/5176.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/10701/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/10701.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/11896/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/11896.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/13812/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/13812.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/13871/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/13871.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/13878/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/13878.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/13938/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/13938.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/15131/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/15131.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/15255/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/15255.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/18835/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/18835.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/31487/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/31487.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/62353/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/62353.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/18836/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/18836.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/18840/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/18840.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/18847/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/18847.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/18862/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/18862.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/18867/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/18867.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/18870/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/18870.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/20669/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/20669.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/28589/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/28589.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/48518/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/48518.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/63888/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/63888.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/40194/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/40194.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/40172/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/40172.png}"/></a>
-</span>
-
-<span>
-    <a href="#" th:href="@{~/map/46159/three-ways}"><img src="#" th:src="@{~/images/maps/thumbnails/46159.png}"/></a>
-</span>
+</div>
 
 </body>
 </html>
