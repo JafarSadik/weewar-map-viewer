@@ -29,14 +29,14 @@ public class ImageController {
 
     @GetMapping(value = "/images/maps/{map_id}", produces = MediaType.IMAGE_PNG_VALUE)
     public ResponseEntity<byte[]> renderWeewarMap(@PathVariable("map_id") Integer mapId) {
-        return weewarMapDAO.getMapById(mapId)
+        return weewarMapDAO.findMapById(mapId)
                 .map(this::weewarMapPNGImage)
                 .orElse(notFoundError());
     }
 
     @GetMapping(value = "/images/maps/thumbnails/{map_id}")
     public ResponseEntity<byte[]> renderMapThumbnail(@PathVariable("map_id") Integer mapId) {
-        return weewarMapDAO.getMapById(mapId)
+        return weewarMapDAO.findMapById(mapId)
                 .map(this::weewarMapPNGThumbnail)
                 .orElse(notFoundError());
     }

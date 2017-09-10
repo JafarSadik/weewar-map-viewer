@@ -1,6 +1,7 @@
 package com.github.weewar.mapviewer.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.github.weewar.mapviewer.model.MapConstants.*;
@@ -33,6 +34,7 @@ public class MapHeader {
         this.height = height;
     }
 
+    @JsonIgnore
     public Vector2D<Integer> getSize() {
         return new Vector2D<>(width, height);
     }
@@ -45,12 +47,17 @@ public class MapHeader {
         return point;
     }
 
+    @JsonIgnore
     public Vector2D<Integer> getSizeInPixels() {
         Vector2D<Integer> mapSize = new Vector2D<>();
         float maxHorizontalOffset = (height > 1 ? hexHorizontalOffset : 0);
         mapSize.setX(Math.round(width * hexWidth + maxHorizontalOffset));
         mapSize.setY(Math.round(hexHeight + (height - 1) * hexVerticalDistance));
         return mapSize;
+    }
+
+    public String getUrlEncodedMapName() {
+        return "undefined";
     }
 
     public int getMapId() {

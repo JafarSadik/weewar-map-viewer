@@ -1,5 +1,6 @@
 package com.github.weewar.mapviewer.dao.memory;
 
+import com.github.weewar.mapviewer.dao.MapSearchCriteria;
 import com.github.weewar.mapviewer.dao.WeewarMapDAO;
 import com.github.weewar.mapviewer.model.AppPaths;
 import com.github.weewar.mapviewer.model.MapHeader;
@@ -11,6 +12,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
@@ -29,7 +32,7 @@ public class InMemoryWeewarMapDAO implements WeewarMapDAO {
     }
 
     @Override
-    public Optional<WeewarMap> getMapById(int mapId) {
+    public Optional<WeewarMap> findMapById(int mapId) {
         try {
             WeewarMap weewarMap = weewarMapLoader.load(mapId);
             return Optional.of(weewarMap);
@@ -40,16 +43,26 @@ public class InMemoryWeewarMapDAO implements WeewarMapDAO {
     }
 
     @Override
-    public Optional<MapHeader> getMapHeaderById(int mapId) {
+    public Optional<MapHeader> findMapHeaderById(int mapId) {
         MapHeader mapHeader = weewarMapHeaders.get(mapId);
         return mapHeader != null ? Optional.of(mapHeader) : Optional.empty();
     }
 
+    @Override
+    public List<MapHeader> findMapHeaders(MapSearchCriteria search) {
+        return weewarMapHeaders.values().stream()
+                .sorted(Comparator.comparingInt(MapHeader::getMapId))
+                .skip(search.getFirstElement())
+                .limit(search.getPageSize())
+                .collect(Collectors.toList());
+    }
+
     public void populate() {
-        Map<Integer, MapHeader> loadedMapHeaders = ClassPath.resources(AppPaths.mapsDir + "*")
-                .parallelStream()
-                .map(url -> weewarMapLoader.load(url).getHeader())
-                .collect(Collectors.toMap(MapHeader::getMapId, mapHeader -> mapHeader));
-        weewarMapHeaders.putAll(loadedMapHeaders);
+        weewarMapHeaders.putAll(
+                ClassPath.resources(AppPaths.mapsDir + "*")
+                        .parallelStream()
+                        .map(url -> weewarMapLoader.load(url).getHeader())
+                        .collect(Collectors.toMap(MapHeader::getMapId, mapHeader -> mapHeader))
+        );
     }
 }
