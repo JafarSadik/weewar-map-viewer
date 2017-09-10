@@ -1,25 +1,19 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 
 <head>
     <title>Search archived weewar maps</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" type="text/css" href="/css/mapviewer.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/map-viewer.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
-    <script src="/js/mapviewer.js"></script>
+    <script src="/js/Templates.js"></script>
+    <script src="/js/MapContainer.js"></script>
+    <script src="/js/SearchPage.js"></script>
 </head>
 
 <body>
-<script id="map-box-template" type="text/template">
-    <div id="map_{{mapId}}" class="map-box">
-        <a href="/map/{{mapId}}/{{revision}}/{{urlEncodedMapName}}"><img src="/images/maps/thumbnails/{{mapId}}.png"/></a>
-    </div>
-</script>
-
 <div id="map-box-container">
 
 </div>
-
 </body>
 </html>
