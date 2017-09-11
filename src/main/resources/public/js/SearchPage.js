@@ -13,8 +13,6 @@ var MapViewer = MapViewer || {};
     }
 
     function loadMoreMaps(_firstMapIndex, _pageSize) {
-        _firstMapIndex = _firstMapIndex || firstMapIndex;
-        _pageSize = _pageSize || pageSize;
         getMaps(_firstMapIndex, _pageSize,
             function (maps) {
                 $.each(maps, function (index, map) {
