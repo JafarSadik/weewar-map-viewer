@@ -1,6 +1,6 @@
 var MapViewer = MapViewer || {};
 (function () {
-    let mapContainer = new MapViewer.MapContainer();
+    let container = new MapViewer.MapContainer();
     let firstMapIndex = 0, pageSize = 100;
 
     $(function () {
@@ -13,14 +13,10 @@ var MapViewer = MapViewer || {};
     }
 
     function loadMoreMaps(_firstMapIndex, _pageSize) {
-        getMaps(_firstMapIndex, _pageSize,
-            function (maps) {
-                $.each(maps, function (index, map) {
-                    let mapBox = MapViewer.Templates.renderMapBox(map);
-                    mapContainer.append(mapBox);
-                });
-                firstMapIndex = _firstMapIndex + _pageSize
-            })
+        getMaps(_firstMapIndex, _pageSize, (maps) => {
+            maps.forEach(map => container.append(MapViewer.Elements.mapBox(map)));
+            firstMapIndex = _firstMapIndex + _pageSize
+        });
     }
 
     function pageScrolledToBottom(callback) {
