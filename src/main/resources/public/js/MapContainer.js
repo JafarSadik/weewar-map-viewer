@@ -4,10 +4,7 @@ MapViewer.MapContainer = function () {
         throw new Error("Constructor called without new!");
     }
 
-    let self = this;
-    $(function () {
-        self.$container = $("#map-box-container");
-    });
+    $(() => this.$container = $("#map-box-container"))
 };
 
 MapViewer.MapContainer.prototype.append = function (mapBox) {

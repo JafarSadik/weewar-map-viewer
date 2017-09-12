@@ -9,3 +9,10 @@ div.map-box {
     border-radius: 5px;
     margin: 2px 2px 2px 2px;
 }
+
+img.ribbon {
+    position: fixed;
+    top: 0;
+    right: 0;
+    border: 0;
+}
