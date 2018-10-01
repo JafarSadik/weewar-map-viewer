@@ -34,7 +34,7 @@ public class WeewarMapLoaderImpl implements WeewarMapLoader {
     @Override
     public WeewarMap load(URL url) throws MapParseException {
         try {
-            return jsonMapper.readValue(url, WeewarMap.Mutable.class).immutable();
+            return jsonMapper.readValue(url, WeewarMap.Mutable.class).toImmutable();
         } catch (IOException e) {
             throw new MapParseException("Failed to parse json map file: " + url.getFile(), e);
         }

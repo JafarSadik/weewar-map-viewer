@@ -29,8 +29,8 @@ public class EnforceKnownProfiles {
         checkCondition(prod ^ dev, "Cannot use 'dev' and 'prod' profiles at the same time.");
     }
 
-    private void checkCondition(boolean condition, String description) {
-        if (!condition) {
+    private void checkCondition(boolean conditionFulfilled, String description) {
+        if (!conditionFulfilled) {
             logger.error(description);
             System.exit(1);
         }

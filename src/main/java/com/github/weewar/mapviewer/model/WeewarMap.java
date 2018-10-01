@@ -55,7 +55,7 @@ public class WeewarMap {
             super.terrain = terrain;
         }
 
-        public WeewarMap immutable() {
+        public WeewarMap toImmutable() {
             return new WeewarMap(header, terrain);
         }
     }
