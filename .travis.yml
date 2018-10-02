@@ -19,7 +19,7 @@ deploy:
   provider: heroku
   app: weemaps
   api_key:
-    secure: "qdcFkm5Wskyj/oDyDWcyWVjTdWP43Af/QxPmGeDGLj4kTJwUFqFPkmDaW6+s2QmL4oi1vhUQFOvdmWwMl4Jw4HL5egCsYTUMTdQ2yHrAZup2X5pswjP5Ne3CYJNaC9UJnV3ue683JRXj0/0/rHXU60oHaPcdl2IR/TDUm148KihQg+v0oPxNhCalIIg2r/pDnba+CntSC8oDubHRIc2aBnOlfjl3+XlrKYgZveSmUzPOeJIgIJS7b/J5CPnv1vNx8xAsRV6NXLQocPYOudIiV2wX1UeQXYaYVIJ60/Ba5hoG8cI/tnmIhb/L6nx8fwgVu6LMLRIm7H3lJSHzGr/DK7wePQ+RaP3lg7+nzibobH8nh+FPpC96ECWGxFTN8T8G+Pa8aiCXMAuhYWw+XVcV+FH72TsQuIHtXlLFNROMPsDHYbdnlAn3mCGcWi/2MGdjL5IiQhuA328J7qMD/jcPUGYtfaQ3XvdD8khnJ/KLQRlshlLk4NLNcW/JiydFruFayF3OKwhgaW7dDbYlfOHlTahyDddz3jwdg0FMfc+IJvU2gYLjvl3+Ck1VxPvO6CziI3t09Sono3/GMlQKVfLzdICcNPcpfOvvshjw1qOHypVdIOnUch+TPoleF9gb2W2+y9uqKRUKOcmQdCT9m6iPxRD1mmAPdXHmrSn/rHqVrsw="
+    secure: "Hq/rJWpuxn+1p0TxucU0gqoi7nA7e9Z53pPyKzHcPPnyb1MzisD0Gd0O8DcvVBVEUv4+yPSTm7q542JiFDYFMKajrcfzsOcM8aDD40zWWsL1AsL/KjfMC/OU9GfLrhBWu9xojLGQFGDYp8JTyhC0lkUTK2LfnNnrDzOT4F5rT4nD3lckBbdXft4Sqxqzf3xC3gJtiCB1OD7EaCqGnxftd7PoRQoQo0+CKhVXBg3NHp1Grutsz1Okj0qlguTqyl0B+AXqJDV1YA/8crGsxaZByaQjXY6sKniB3ZBnbBnk+ziryivyCj0d6gtQGTP6cwPPa+gGNztJTYcwRzwO5Ahdv2WJbXCzMKTC04N41eC8OK4/H78T1vmAqXSCUJCJhOYHHlX6St0P5wpHmrZ7UXZ6v7EIJP8WHpts1bAIKDucmGB2f/Qb5OKe2YHqkJabPhmqLeczA1tnZyk9VXXjrytIdOE1MME/PLx2CK+kbGrbsGta+24Je8/qI1Ox1topunglYoiMSND32ULTtKshoCkgoYCK3G5SJGXRSplATXf6o8azfoTqfOXtpGHH3DapfOufG1A8xQaerdujIqqsb02koHwIHJikxgbuasJ7Zv95LNMTZmwNUU9NrvRSX/jhAYFmCbPT5tY6KmcU5LBGFqlHHcN5Cz+BIVReTYjefsyRFd4="
   on:
     branch: master
 
@@ -29,8 +29,8 @@ before_cache:
 
 cache:
   directories:
-    - ~/.gradle/caches/
-    - ~/.gradle/wrapper/
+  - ~/.gradle/caches/
+  - ~/.gradle/wrapper/
 
 notifications:
   email:
