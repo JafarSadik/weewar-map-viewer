@@ -1,19 +1,11 @@
 # Travis CI configured to build java 8 project using gradle.
 # https://travis-ci.org/
 language: java
-
-dist: trusty
-sudo: required
-
-jdk:
-  - oraclejdk8
-
-before_install:
-  - chmod +x gradlew
+jdk: oraclejdk8
 
 install: []
 
-script: ./gradlew build
+script: gradle build
 
 deploy:
   provider: heroku
@@ -23,18 +15,9 @@ deploy:
   on:
     branch: master
 
-before_cache:
-  - rm -f  ~/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr ~/.gradle/caches/*/plugin-resolution/
-
-cache:
-  directories:
-  - ~/.gradle/caches/
-  - ~/.gradle/wrapper/
-
 notifications:
   email:
     recipients:
-      - dzafar.sadik@gmail.com
+    - dzafar.sadik@gmail.com
     on_success: change
     on_failure: always
