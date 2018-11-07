@@ -19,7 +19,7 @@ compileJava   {
 }
 
 springBoot {
-    mainClass = 'com.github.weewar.mapviewer.WeewarMapViewer'
+    mainClass = 'com.github.weewar.mapviewer.WeewarMapViewerKt'
 }
 
 repositories {

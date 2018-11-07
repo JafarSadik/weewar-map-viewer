@@ -7,5 +7,5 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 open class WeewarMapViewer
 
 fun main(args: Array<String>) {
-    SpringApplication.run(WeewarMapViewer::class, *args)
+    SpringApplication.run(WeewarMapViewer::class.java, *args)
 }
