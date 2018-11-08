@@ -2,6 +2,7 @@ package com.github.weewar.mapviewer.service.impl
 
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.github.weewar.mapviewer.exceptions.MapParseException
 import com.github.weewar.mapviewer.model.AppPaths
 import com.github.weewar.mapviewer.model.WeewarMap
@@ -13,12 +14,8 @@ import java.net.URL
 
 @Service
 class WeewarMapLoaderImpl : WeewarMapLoader {
-    private val jsonMapper: ObjectMapper
-
-    init {
-        this.jsonMapper = ObjectMapper()
-                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-    }
+    private val jsonMapper = ObjectMapper().registerModule(KotlinModule())
+            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
 
     @Throws(MapParseException::class)
     override fun load(mapId: Int): WeewarMap {

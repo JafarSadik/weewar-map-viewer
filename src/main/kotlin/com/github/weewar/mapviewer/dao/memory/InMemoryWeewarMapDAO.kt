@@ -35,7 +35,7 @@ class InMemoryWeewarMapDAO(private val weewarMapLoader: WeewarMapLoader) : Weewa
     }
 
     override fun findMapHeaders(searchCriteria: MapSearchCriteria): List<MapHeader> {
-        return weewarMapHeaders.values.sortedBy { it.mapId }
+        return weewarMapHeaders.values.sortedBy { it.id }
                 .drop(searchCriteria.getFirstElement())
                 .take(searchCriteria.getPageSize())
     }
@@ -45,7 +45,7 @@ class InMemoryWeewarMapDAO(private val weewarMapLoader: WeewarMapLoader) : Weewa
                 ClassPath.resources(AppPaths.mapsDir + "*")
                         .parallelStream()
                         .map { url -> weewarMapLoader.load(url).header }
-                        .collect(toMap({ it.mapId }, { it }))
+                        .collect(toMap({ it.id }, { it }))
         )
     }
 }

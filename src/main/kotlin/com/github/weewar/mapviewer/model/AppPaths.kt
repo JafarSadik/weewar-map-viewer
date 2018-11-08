@@ -1,7 +1,7 @@
 package com.github.weewar.mapviewer.model
 
 object AppPaths {
-    val mapsDir = "/public/api/maps/"
-    val terrainImages = "/terrain.yml"
-    val unitImages = "/units.yml"
+    const val mapsDir = "/public/api/maps/"
+    const val terrainImages = "/terrain.yml"
+    const val unitImages = "/units.yml"
 }

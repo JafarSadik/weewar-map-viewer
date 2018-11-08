@@ -27,7 +27,7 @@ class ImageRepositoryImpl : ImageRepository {
 
     @Throws(ImageNotFoundException::class)
     override fun getTerrain(terrainType: TerrainType, owner: Owner?, direction: Direction?): Image = terrainImages[TerrainImageKey(terrainType, owner, direction)]
-                    ?: throw ImageNotFoundException("Terrain image not found: type = $terrainType, owner = $owner, direction = $direction")
+            ?: throw ImageNotFoundException("Terrain image not found: type = $terrainType, owner = $owner, direction = $direction")
 
     @Throws(ImageNotFoundException::class)
     override fun getUnit(unitType: UnitType, owner: Owner): Image = unitImages[UnitImageKey(unitType, owner)]

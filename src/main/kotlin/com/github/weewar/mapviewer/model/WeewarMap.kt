@@ -3,7 +3,12 @@ package com.github.weewar.mapviewer.model
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.annotation.JsonUnwrapped
 
-class WeewarMap(@JsonUnwrapped val header: MapHeader, @JsonProperty("terrain") val terrain: MapTerrain) {
+class WeewarMap {
+    @JsonUnwrapped
+    lateinit var header: MapHeader
+
+    @JsonProperty("terrain")
+    lateinit var terrain: List<Tile>
 
     fun size(): Pair<Int, Int> = header.size()
 
