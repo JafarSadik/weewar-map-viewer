@@ -1,12 +1,13 @@
 package com.github.weewar.mapviewer.service.impl
 
-import com.github.weewar.mapviewer.exceptions.ImageNotFoundException
-import com.github.weewar.mapviewer.exceptions.ImagePreloadException
-import com.github.weewar.mapviewer.model.AppPaths
 import com.github.weewar.mapviewer.model.enums.Direction
 import com.github.weewar.mapviewer.model.enums.Owner
 import com.github.weewar.mapviewer.model.enums.TerrainType
 import com.github.weewar.mapviewer.model.enums.UnitType
+import com.github.weewar.mapviewer.model.terrainImagesConfig
+import com.github.weewar.mapviewer.model.unitImagesConfig
+import com.github.weewar.mapviewer.service.ImageNotFoundException
+import com.github.weewar.mapviewer.service.ImagePreloadException
 import com.github.weewar.mapviewer.service.ImageRepository
 import com.github.weewar.mapviewer.service.impl.keys.TerrainImageKey
 import com.github.weewar.mapviewer.service.impl.keys.UnitImageKey
@@ -45,7 +46,7 @@ class ImageRepositoryImpl : ImageRepository {
 
     @Throws(IOException::class)
     private fun preloadTerrainImages(yaml: Yaml) {
-        javaClass.getResourceAsStream(AppPaths.terrainImages).use { inputStream ->
+        javaClass.getResourceAsStream(terrainImagesConfig).use { inputStream ->
             val terrainFiles = yaml.loadAs(inputStream, Map::class.java) as Map<String, Map<String, String?>>
             for (terrainFile in terrainFiles.keys) {
                 val terrainDetails = terrainFiles[terrainFile] as Map<String, String?>
@@ -62,7 +63,7 @@ class ImageRepositoryImpl : ImageRepository {
 
     @Throws(IOException::class)
     private fun preloadUnitImages(yaml: Yaml) {
-        javaClass.getResourceAsStream(AppPaths.unitImages).use { inputStream ->
+        javaClass.getResourceAsStream(unitImagesConfig).use { inputStream ->
             val unitFiles = yaml.loadAs(inputStream, Map::class.java) as Map<String, Map<String, String?>>
             for (unitFile in unitFiles.keys) {
                 val unitDetails = unitFiles[unitFile] as Map<String, String?>

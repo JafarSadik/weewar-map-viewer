@@ -1,9 +1,9 @@
 package com.github.weewar.mapviewer.controllers
 
 import com.github.weewar.mapviewer.dao.WeewarMapDAO
-import com.github.weewar.mapviewer.model.MapConstants.thumbnailHeight
-import com.github.weewar.mapviewer.model.MapConstants.thumbnailWidth
 import com.github.weewar.mapviewer.model.WeewarMap
+import com.github.weewar.mapviewer.model.thumbnailHeight
+import com.github.weewar.mapviewer.model.thumbnailWidth
 import com.github.weewar.mapviewer.service.WeewarMapRenderer
 import com.github.weewar.mapviewer.utils.Images
 import org.springframework.http.MediaType

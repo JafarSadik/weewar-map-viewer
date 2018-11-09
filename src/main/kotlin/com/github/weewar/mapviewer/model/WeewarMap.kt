@@ -10,18 +10,11 @@ class WeewarMap {
     @JsonProperty("terrain")
     lateinit var terrain: List<Tile>
 
-    fun size(): Pair<Int, Int> = header.size()
+    fun sizeInPixels() = header.sizeInPixels()
 
-    fun sizeInPixels(): Pair<Int, Int> = header.sizeInPixels()
-
-    fun hexToPixel(column: Int, row: Int): Pair<Int, Int> {
-        return header.hexToPixel(column, row)
-    }
+    fun hexToPixel(column: Int, row: Int) = header.hexToPixel(column, row)
 
     override fun toString(): String {
-        return "WeewarMap{" +
-                "header=" + header +
-                ", terrain=" + terrain +
-                '}'.toString()
+        return "WeewarMap(header=$header, terrain=$terrain)"
     }
 }

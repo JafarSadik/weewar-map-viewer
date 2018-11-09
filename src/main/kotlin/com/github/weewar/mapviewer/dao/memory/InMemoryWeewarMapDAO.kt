@@ -2,9 +2,9 @@ package com.github.weewar.mapviewer.dao.memory
 
 import com.github.weewar.mapviewer.dao.MapSearchCriteria
 import com.github.weewar.mapviewer.dao.WeewarMapDAO
-import com.github.weewar.mapviewer.model.AppPaths
 import com.github.weewar.mapviewer.model.MapHeader
 import com.github.weewar.mapviewer.model.WeewarMap
+import com.github.weewar.mapviewer.model.mapsDir
 import com.github.weewar.mapviewer.service.WeewarMapLoader
 import com.github.weewar.mapviewer.utils.ClassPath
 import org.slf4j.LoggerFactory
@@ -42,7 +42,7 @@ class InMemoryWeewarMapDAO(private val weewarMapLoader: WeewarMapLoader) : Weewa
 
     fun populate() {
         weewarMapHeaders.putAll(
-                ClassPath.resources(AppPaths.mapsDir + "*")
+                ClassPath.resources("$mapsDir*")
                         .parallelStream()
                         .map { url -> weewarMapLoader.load(url).header }
                         .collect(toMap({ it.id }, { it }))

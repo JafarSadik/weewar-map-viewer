@@ -1,9 +1,9 @@
 package com.github.weewar.mapviewer.service.impl
 
-import com.github.weewar.mapviewer.exceptions.ImageNotFoundException
-import com.github.weewar.mapviewer.exceptions.ImageResizeException
 import com.github.weewar.mapviewer.model.WeewarMap
+import com.github.weewar.mapviewer.service.ImageNotFoundException
 import com.github.weewar.mapviewer.service.ImageRepository
+import com.github.weewar.mapviewer.service.ImageResizeException
 import com.github.weewar.mapviewer.service.WeewarMapRenderer
 import net.coobird.thumbnailator.Thumbnails
 import net.coobird.thumbnailator.resizers.configurations.AlphaInterpolation

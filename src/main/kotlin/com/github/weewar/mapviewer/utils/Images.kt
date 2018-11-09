@@ -1,6 +1,6 @@
 package com.github.weewar.mapviewer.utils
 
-import com.github.weewar.mapviewer.exceptions.ImageIOException
+import com.github.weewar.mapviewer.service.ImageIOException
 import java.awt.image.RenderedImage
 import java.io.ByteArrayOutputStream
 import java.io.IOException

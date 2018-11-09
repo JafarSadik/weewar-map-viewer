@@ -3,9 +3,9 @@ package com.github.weewar.mapviewer.service.impl
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.KotlinModule
-import com.github.weewar.mapviewer.exceptions.MapParseException
-import com.github.weewar.mapviewer.model.AppPaths
 import com.github.weewar.mapviewer.model.WeewarMap
+import com.github.weewar.mapviewer.model.mapsDir
+import com.github.weewar.mapviewer.service.MapParseException
 import com.github.weewar.mapviewer.service.WeewarMapLoader
 import com.github.weewar.mapviewer.utils.ClassPath
 import org.springframework.stereotype.Service
@@ -19,7 +19,7 @@ class WeewarMapLoaderImpl : WeewarMapLoader {
 
     @Throws(MapParseException::class)
     override fun load(mapId: Int): WeewarMap {
-        val path = AppPaths.mapsDir + mapId
+        val path = mapsDir + mapId
         val mapURL = ClassPath.resource(path)
         return load(mapURL)
     }
@@ -36,6 +36,6 @@ class WeewarMapLoaderImpl : WeewarMapLoader {
 
     @Throws(MapParseException::class)
     override fun loadAll(): List<WeewarMap> {
-        return ClassPath.resources(AppPaths.mapsDir + "*").map { load(it) }
+        return ClassPath.resources("$mapsDir*").map { load(it) }
     }
 }

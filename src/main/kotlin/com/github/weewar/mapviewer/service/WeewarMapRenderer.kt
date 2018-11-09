@@ -1,7 +1,5 @@
 package com.github.weewar.mapviewer.service
 
-import com.github.weewar.mapviewer.exceptions.ImageNotFoundException
-import com.github.weewar.mapviewer.exceptions.ImageResizeException
 import com.github.weewar.mapviewer.model.WeewarMap
 import java.awt.image.BufferedImage
 

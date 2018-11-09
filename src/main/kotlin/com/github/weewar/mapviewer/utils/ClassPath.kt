@@ -1,6 +1,5 @@
 package com.github.weewar.mapviewer.utils
 
-import com.github.weewar.mapviewer.exceptions.ClassPathResourceException
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver
 import java.io.IOException
 import java.net.URL
@@ -33,3 +32,5 @@ object ClassPath {
 
     }
 }
+
+class ClassPathResourceException(message: String, cause: Throwable) : RuntimeException(message, cause)
