@@ -8,7 +8,9 @@ import com.github.weewar.mapviewer.service.impl.keys.UnitImageKey
 import org.springframework.stereotype.Service
 import org.yaml.snakeyaml.Yaml
 import java.awt.Image
+import java.awt.image.BufferedImage
 import java.io.IOException
+import java.io.InputStream
 import java.util.concurrent.ConcurrentHashMap
 import javax.imageio.ImageIO
 
@@ -31,42 +33,40 @@ class ImageRepositoryImpl : ImageRepository {
     @Throws(ImagePreloadException::class)
     override fun preloadImages() =
             try {
-                val yaml = Yaml()
-                preloadTerrainImages(yaml)
-                preloadUnitImages(yaml)
+                preloadTerrainImages()
+                preloadUnitImages()
             } catch (e: IOException) {
                 throw ImagePreloadException(e)
             }
 
     @Throws(IOException::class)
-    private fun preloadTerrainImages(yaml: Yaml) {
-        javaClass.getResourceAsStream(terrainImagesConfig).use { inputStream ->
-            val terrainFiles = yaml.loadAs(inputStream, Map::class.java) as Map<String, Map<String, String?>>
-            for (terrainFile in terrainFiles.keys) {
-                val terrainDetails = terrainFiles[terrainFile] as Map<String, String?>
-
-                val terrainType = TerrainType.of(terrainDetails["type"]!!)
-                val owner = Owner.of(terrainDetails.get("owner"))
-                val direction = Direction.of(terrainDetails.get("direction"))
-                val url = javaClass.getResource(terrainFile)
-                val terrainImage = ImageIO.read(url)
-                terrainImages[TerrainImageKey(terrainType, owner, direction)] = terrainImage
-            }
-        }
+    private fun preloadTerrainImages() = withConfigFile(terrainImagesConfig) { terrainImage, terrainInfo ->
+        val terrainType = TerrainType.of(terrainInfo["type"]!!)
+        val owner = Owner.of(terrainInfo["owner"])
+        val direction = Direction.of(terrainInfo["direction"])
+        terrainImages[TerrainImageKey(terrainType, owner, direction)] = terrainImage
     }
 
     @Throws(IOException::class)
-    private fun preloadUnitImages(yaml: Yaml) {
-        javaClass.getResourceAsStream(unitImagesConfig).use { inputStream ->
-            val unitFiles = yaml.loadAs(inputStream, Map::class.java) as Map<String, Map<String, String?>>
-            for (unitFile in unitFiles.keys) {
-                val unitDetails = unitFiles[unitFile] as Map<String, String?>
-                val unitType = UnitType.of(unitDetails["type"])
-                val owner = Owner.of(unitDetails["owner"])
-                val url = javaClass.getResource(unitFile)
-                val unitImage = ImageIO.read(url)
-                unitImages[UnitImageKey(unitType!!, owner!!)] = unitImage
+    private fun preloadUnitImages() = withConfigFile(unitImagesConfig) { unitImage, unitInfo ->
+        val unitType = UnitType.of(unitInfo["type"])
+        val owner = Owner.of(unitInfo["owner"])
+        unitImages[UnitImageKey(unitType!!, owner!!)] = unitImage
+    }
+
+    @Throws(IOException::class)
+    private fun withConfigFile(configFile: String, configEntryConsumer: (image: BufferedImage, imageInfo: Map<String, String?>) -> Unit) {
+        javaClass.getResourceAsStream(configFile).use { inputStream ->
+            val config = loadConfig(inputStream)
+            for (file in config.keys) {
+                val imageInfo = config[file] as Map<String, String?>
+                val image = ImageIO.read(javaClass.getResource(file))
+                configEntryConsumer(image, imageInfo)
             }
         }
     }
+
+    @Suppress("UNCHECKED_CAST")
+    private fun loadConfig(inputStream: InputStream): Map<String, Map<String, String?>> =
+            Yaml().loadAs(inputStream, Map::class.java) as Map<String, Map<String, String?>>
 }

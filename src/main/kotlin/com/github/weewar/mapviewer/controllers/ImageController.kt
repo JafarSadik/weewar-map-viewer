@@ -17,16 +17,14 @@ class ImageController(private val weewarMapRenderer: WeewarMapRenderer, private 
     @GetMapping("/images/maps/{map_id}", produces = [MediaType.IMAGE_PNG_VALUE])
     fun renderWeewarMap(@PathVariable("map_id") mapId: Int): ResponseEntity<ByteArray> {
         return weewarMapDAO.findMapById(mapId)
-                .map { image(it) }
-                .map { httpOk(it) }
+                .map { httpOk(image(it)) }
                 .orElse(httpNotFoundError())
     }
 
     @GetMapping("/images/maps/thumbnails/{map_id}")
     fun renderMapThumbnail(@PathVariable("map_id") mapId: Int): ResponseEntity<ByteArray> {
         return weewarMapDAO.findMapById(mapId)
-                .map { thumbnail(it) }
-                .map { httpOk(it) }
+                .map { httpOk(thumbnail(it)) }
                 .orElse(httpNotFoundError())
     }
 

@@ -23,14 +23,12 @@ class WeewarMapLoaderImpl : WeewarMapLoader {
     }
 
     @Throws(MapParseException::class)
-    override fun load(mapURL: URL): WeewarMap {
-        try {
-            return jsonMapper.readValue(mapURL, WeewarMap::class.java)
-        } catch (e: IOException) {
-            throw MapParseException("Failed to parse json map file: " + mapURL.file, e)
-        }
-
-    }
+    override fun load(mapURL: URL): WeewarMap =
+            try {
+                jsonMapper.readValue(mapURL, WeewarMap::class.java)
+            } catch (e: IOException) {
+                throw MapParseException("Failed to parse json map file: " + mapURL.file, e)
+            }
 
     @Throws(MapParseException::class)
     override fun loadAll(): List<WeewarMap> {
