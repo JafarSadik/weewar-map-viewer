@@ -4,12 +4,12 @@ import com.github.weewar.mapviewer.dao.WeewarMapDAO
 import com.github.weewar.mapviewer.model.*
 import com.github.weewar.mapviewer.service.WeewarMapRenderer
 import com.github.weewar.mapviewer.utils.Images
-import org.springframework.http.MediaType
-import org.springframework.http.ResponseEntity
+import org.springframework.http.*
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import java.awt.image.BufferedImage
+import java.util.concurrent.TimeUnit
 
 @Controller
 class ImageController(private val weewarMapRenderer: WeewarMapRenderer, private val weewarMapDAO: WeewarMapDAO) {
@@ -39,6 +39,7 @@ class ImageController(private val weewarMapRenderer: WeewarMapRenderer, private 
         return ResponseEntity.ok()
                 .contentType(MediaType.IMAGE_PNG)
                 .contentLength(pngData.size.toLong())
+                .cacheControl(CacheControl.maxAge(365, TimeUnit.DAYS))
                 .body(pngData)
     }
 }
