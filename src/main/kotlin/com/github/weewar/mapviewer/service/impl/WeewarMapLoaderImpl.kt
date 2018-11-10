@@ -12,8 +12,7 @@ import java.net.URL
 
 @Service
 class WeewarMapLoaderImpl : WeewarMapLoader {
-    private val jsonMapper = ObjectMapper().registerModule(KotlinModule())
-            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+    private val jsonMapper: ObjectMapper by lazy { configObjectMapper() }
 
     @Throws(MapParseException::class)
     override fun load(mapId: Int): WeewarMap {
@@ -34,4 +33,7 @@ class WeewarMapLoaderImpl : WeewarMapLoader {
     override fun loadAll(): List<WeewarMap> {
         return ClassPath.resources("$mapsDir*").map { load(it) }
     }
+
+    private fun configObjectMapper() = ObjectMapper().registerModule(KotlinModule())
+            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
 }
