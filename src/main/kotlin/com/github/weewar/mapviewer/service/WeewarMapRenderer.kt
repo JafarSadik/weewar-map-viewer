@@ -1,6 +1,6 @@
 package com.github.weewar.mapviewer.service
 
-import com.github.weewar.mapviewer.model.WeewarMap
+import com.github.weewar.mapviewer.model.*
 import java.awt.image.BufferedImage
 
 interface WeewarMapRenderer {

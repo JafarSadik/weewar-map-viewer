@@ -1,9 +1,8 @@
 package com.github.weewar.mapviewer.service
 
-import com.github.weewar.mapviewer.model.enums.Direction
-import com.github.weewar.mapviewer.model.enums.Owner
-import com.github.weewar.mapviewer.model.enums.TerrainType
-import com.github.weewar.mapviewer.model.enums.UnitType
+import com.github.weewar.mapviewer.model.ImageNotFoundException
+import com.github.weewar.mapviewer.model.ImagePreloadException
+import com.github.weewar.mapviewer.model.enums.*
 import java.awt.Image
 
 interface ImageRepository {
@@ -17,10 +16,3 @@ interface ImageRepository {
     fun preloadImages()
 }
 
-class ImageResizeException(cause: Throwable) : RuntimeException(cause)
-
-class ImagePreloadException(cause: Throwable) : RuntimeException(cause)
-
-class ImageNotFoundException(message: String) : RuntimeException(message)
-
-class ImageIOException(cause: Throwable) : RuntimeException(cause)

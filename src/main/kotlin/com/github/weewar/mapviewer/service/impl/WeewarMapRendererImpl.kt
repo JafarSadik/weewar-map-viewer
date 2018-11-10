@@ -1,15 +1,10 @@
 package com.github.weewar.mapviewer.service.impl
 
-import com.github.weewar.mapviewer.model.WeewarMap
-import com.github.weewar.mapviewer.service.ImageNotFoundException
+import com.github.weewar.mapviewer.model.*
 import com.github.weewar.mapviewer.service.ImageRepository
-import com.github.weewar.mapviewer.service.ImageResizeException
 import com.github.weewar.mapviewer.service.WeewarMapRenderer
 import net.coobird.thumbnailator.Thumbnails
-import net.coobird.thumbnailator.resizers.configurations.AlphaInterpolation
-import net.coobird.thumbnailator.resizers.configurations.Antialiasing
-import net.coobird.thumbnailator.resizers.configurations.Dithering
-import net.coobird.thumbnailator.resizers.configurations.Rendering
+import net.coobird.thumbnailator.resizers.configurations.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.awt.Color
