@@ -15,18 +15,18 @@ import javax.imageio.ImageIO
 @Service
 class ImageRepositoryImpl : ImageRepository {
 
-    private val terrainImages = ConcurrentHashMap<TerrainImageKey, Image>(50 /*max terrain images*/,
-            0.75f /*default load factor*/, 1 /*single shard*/)
-    private val unitImages = ConcurrentHashMap<UnitImageKey, Image>(200 /*max unit images*/,
-            0.75f /*default load factor*/, 1 /*single shard*/)
+    private val terrainImages = ConcurrentHashMap<TerrainImageKey, Image>()
+    private val unitImages = ConcurrentHashMap<UnitImageKey, Image>()
 
     @Throws(ImageNotFoundException::class)
-    override fun getTerrain(terrainType: TerrainType, owner: Owner?, direction: Direction?): Image = terrainImages[TerrainImageKey(terrainType, owner, direction)]
-            ?: throw ImageNotFoundException("Terrain image not found: type = $terrainType, owner = $owner, direction = $direction")
+    override fun getTerrain(terrainType: TerrainType, owner: Owner?, direction: Direction?): Image =
+            terrainImages[TerrainImageKey(terrainType, owner, direction)]
+                    ?: throw ImageNotFoundException("Terrain image not found: type = $terrainType, owner = $owner, direction = $direction")
 
     @Throws(ImageNotFoundException::class)
-    override fun getUnit(unitType: UnitType, owner: Owner): Image = unitImages[UnitImageKey(unitType, owner)]
-            ?: throw ImageNotFoundException("Unit image not found: type = $unitType, owner = $owner")
+    override fun getUnit(unitType: UnitType, owner: Owner): Image =
+            unitImages[UnitImageKey(unitType, owner)]
+                    ?: throw ImageNotFoundException("Unit image not found: type = $unitType, owner = $owner")
 
     @Throws(ImagePreloadException::class)
     override fun preloadImages() =

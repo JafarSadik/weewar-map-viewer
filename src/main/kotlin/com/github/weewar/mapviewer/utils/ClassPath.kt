@@ -10,26 +10,22 @@ object ClassPath {
     private val resourceResolver = PathMatchingResourcePatternResolver()
 
     @Throws(ClassPathResourceException::class)
-    fun resources(locationPattern: String): List<URL> {
-        try {
-            val resourceURLs = LinkedList<URL>()
-            for (resource in resourceResolver.getResources(locationPattern)) {
-                resourceURLs.add(resource.url)
+    fun resources(locationPattern: String): List<URL> =
+            try {
+                val resourceURLs = LinkedList<URL>()
+                for (resource in resourceResolver.getResources(locationPattern)) {
+                    resourceURLs.add(resource.url)
+                }
+                resourceURLs
+            } catch (e: IOException) {
+                throw ClassPathResourceException("Unable to locate resources in a classpath: $locationPattern", e)
             }
-            return resourceURLs
-        } catch (e: IOException) {
-            throw ClassPathResourceException("Unable to locate resources in a classpath: $locationPattern", e)
-        }
-
-    }
 
     @Throws(ClassPathResourceException::class)
-    fun resource(path: String): URL {
-        try {
-            return resourceResolver.getResource(path).url
-        } catch (e: IOException) {
-            throw ClassPathResourceException("Unable to locate resource in a classpath: $path", e)
-        }
-
-    }
+    fun resource(path: String): URL =
+            try {
+                resourceResolver.getResource(path).url
+            } catch (e: IOException) {
+                throw ClassPathResourceException("Unable to locate resource in a classpath: $path", e)
+            }
 }

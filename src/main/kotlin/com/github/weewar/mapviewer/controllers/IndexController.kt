@@ -8,16 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping
 class IndexController : ErrorController {
 
     @GetMapping("/")
-    fun gotoSearchPage(): String {
-        return "redirect:/search"
-    }
+    fun gotoSearchPage(): String = "redirect:/search"
 
     @GetMapping("/error")
-    fun handleErrors(): String {
-        return "redirect:/search"
-    }
+    fun handleErrors(): String = "redirect:/search"
 
-    override fun getErrorPath(): String {
-        return "/error"
-    }
+    override fun getErrorPath(): String = "/error"
 }

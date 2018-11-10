@@ -8,14 +8,12 @@ import javax.imageio.ImageIO
 
 object Images {
     @Throws(ImageIOException::class)
-    fun toPNG(image: RenderedImage): ByteArray {
-        try {
-            val imageData = ByteArrayOutputStream()
-            ImageIO.write(image, "png", imageData)
-            return imageData.toByteArray()
-        } catch (e: IOException) {
-            throw ImageIOException(e)
-        }
-
-    }
+    fun toPNG(image: RenderedImage): ByteArray =
+            try {
+                val imageData = ByteArrayOutputStream()
+                ImageIO.write(image, "png", imageData)
+                imageData.toByteArray()
+            } catch (e: IOException) {
+                throw ImageIOException(e)
+            }
 }

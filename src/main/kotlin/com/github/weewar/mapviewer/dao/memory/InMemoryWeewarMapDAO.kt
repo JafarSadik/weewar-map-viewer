@@ -15,8 +15,7 @@ import java.util.stream.Collectors.toMap
 class InMemoryWeewarMapDAO(private val weewarMapLoader: WeewarMapLoader) : WeewarMapDAO {
 
     private val logger = LoggerFactory.getLogger(InMemoryWeewarMapDAO::class.java)
-    private val weewarMapHeaders = ConcurrentHashMap<Int, MapHeader>(1300 /*max amount of maps*/,
-            0.75f /*default load factor*/, 1 /*single shard*/)
+    private val weewarMapHeaders = ConcurrentHashMap<Int, MapHeader>()
 
     override fun findMapById(mapId: Int): Optional<WeewarMap> =
             try {
@@ -27,23 +26,16 @@ class InMemoryWeewarMapDAO(private val weewarMapLoader: WeewarMapLoader) : Weewa
                 Optional.empty()
             }
 
-    override fun findMapHeaderById(mapId: Int): Optional<MapHeader> {
-        val mapHeader = weewarMapHeaders[mapId]
-        return if (mapHeader != null) Optional.of(mapHeader) else Optional.empty()
-    }
+    override fun findMapHeaderById(mapId: Int): Optional<MapHeader> = Optional.ofNullable(weewarMapHeaders[mapId])
 
-    override fun findMapHeaders(searchCriteria: MapSearchCriteria): List<MapHeader> {
-        return weewarMapHeaders.values.sortedBy { it.id }
-                .drop(searchCriteria.getFirstElement())
-                .take(searchCriteria.getPageSize())
-    }
+    override fun findMapHeaders(searchCriteria: MapSearchCriteria): List<MapHeader> =
+            weewarMapHeaders.values.sortedBy { it.id }
+                    .drop(searchCriteria.firstElement)
+                    .take(searchCriteria.pageSize)
 
-    fun populate() {
-        weewarMapHeaders.putAll(
-                ClassPath.resources("$mapsDir*")
-                        .parallelStream()
-                        .map { url -> weewarMapLoader.load(url).header }
-                        .collect(toMap({ it.id }, { it }))
-        )
-    }
+    fun populate() = weewarMapHeaders.putAll(
+            ClassPath.resources("$mapsDir*").parallelStream()
+                    .map { url -> weewarMapLoader.load(url).header }
+                    .collect(toMap({ it.id }, { it }))
+    )
 }

@@ -13,10 +13,6 @@ apply plugin: 'java'
 apply plugin: 'kotlin'
 apply plugin: 'org.springframework.boot'
 
-compileJava   {
-    sourceCompatibility = '1.8'
-    targetCompatibility = '1.8'
-}
 
 springBoot {
     mainClass = 'com.github.weewar.mapviewer.WeewarMapViewerKt'
@@ -28,37 +24,37 @@ repositories {
 }
 
 dependencies {
-    compile 'org.springframework.boot:spring-boot-starter-web:1.5.6.RELEASE', {
-        exclude module: 'spring-boot-starter-tomcat'
-    }
-    compile 'org.springframework.boot:spring-boot-starter-jetty:1.5.6.RELEASE'
-    compile 'org.springframework.boot:spring-boot-starter-thymeleaf:1.5.6.RELEASE'
-    compile 'org.springframework.boot:spring-boot-starter-web:1.5.6.RELEASE'
+    compile(
+            'org.springframework.boot:spring-boot-starter-web:1.5.6.RELEASE',
+            'org.springframework.boot:spring-boot-starter-thymeleaf:1.5.6.RELEASE',
+            'org.springframework.boot:spring-boot-starter-web:1.5.6.RELEASE',
+            'com.fasterxml.jackson.core:jackson-core:2.9.7',
+            'com.fasterxml.jackson.core:jackson-databind:2.9.7',
+            'com.fasterxml.jackson.core:jackson-annotations:2.9.7',
+            'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.9.7',
+            'com.fasterxml.jackson.module:jackson-module-kotlin:2.9.7',
+            'org.jetbrains.kotlin:kotlin-stdlib-jdk8',
+            'org.jetbrains.kotlin:kotlin-reflect:1.3.0',
+            'net.coobird:thumbnailator:0.4.8',
+            'com.github.mrcritical:ironcache:2.0.0'
+    )
 
-    compile 'com.fasterxml.jackson.core:jackson-core:2.9.7'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.9.7'
-    compile 'com.fasterxml.jackson.core:jackson-annotations:2.9.7'
-    compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.9.7'
-    compile('com.fasterxml.jackson.module:jackson-module-kotlin:2.9.7')
-
-    compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    compile("org.jetbrains.kotlin:kotlin-reflect:1.3.0")
-    compile 'net.coobird:thumbnailator:0.4.8'
-
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.mockito:mockito-all:1.10+'
-    testCompile 'nl.jqno.equalsverifier:equalsverifier:2.3.3'
-    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile(
+            'junit:junit:4.12',
+            'org.mockito:mockito-all:1.10+',
+            'nl.jqno.equalsverifier:equalsverifier:2.3.3',
+            'org.springframework.boot:spring-boot-starter-test',
+    )
 }
 
 
 task convertMaps {
-    description = "Converts original weewar maps from XML to JSON format"
-    group = "weewar map viewer"
+    description = 'Converts original weewar maps from XML to JSON format'
+    group = 'weewar map viewer'
 
-    def targetMapsDir = "${project.rootDir}/src/main/resources/public/api/maps"
-    def script = "${project.rootDir}/bin/maps/convert-maps.groovy"
-    def args = ["--force", targetMapsDir] as String[]
+    def targetMapsDir = '${project.rootDir}/src/main/resources/public/api/maps'
+    def script = '${project.rootDir}/bin/maps/convert-maps.groovy'
+    def args = ['--force', targetMapsDir] as String[]
     def bindings = [force: true, targetMapsDir: targetMapsDir]
 
     doLast {
@@ -67,13 +63,18 @@ task convertMaps {
     }
 }
 
+compileJava {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+}
+
 compileKotlin {
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = '1.8'
     }
 }
 compileTestKotlin {
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = '1.8'
     }
 }
