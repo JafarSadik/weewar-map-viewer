@@ -15,7 +15,7 @@ import java.util.stream.Collectors.toMap
 class InMemoryWeewarMapDAO(private val weewarMapLoader: WeewarMapLoader) : WeewarMapDAO {
 
     private val logger = LoggerFactory.getLogger(InMemoryWeewarMapDAO::class.java)
-    private val weewarMapHeaders = ConcurrentHashMap<Int, MapHeader>()
+    private val weewarMapHeaders = ConcurrentHashMap<Int, MapHeader>(50, 0.75f, 1)
 
     override fun findMapById(mapId: Int): Optional<WeewarMap> =
             try {

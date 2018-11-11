@@ -17,8 +17,8 @@ import javax.imageio.ImageIO
 @Service
 class ImageRepositoryImpl : ImageRepository {
 
-    private val terrainImages = ConcurrentHashMap<TerrainImageKey, Image>()
-    private val unitImages = ConcurrentHashMap<UnitImageKey, Image>()
+    private val terrainImages = ConcurrentHashMap<TerrainImageKey, Image>(50, 0.75f, 1)
+    private val unitImages = ConcurrentHashMap<UnitImageKey, Image>(50, 0.75f, 1)
 
     @Throws(ImageNotFoundException::class)
     override fun getTerrain(terrainType: TerrainType, owner: Owner?, direction: Direction?): Image =
