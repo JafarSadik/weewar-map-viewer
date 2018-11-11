@@ -1,7 +1,7 @@
 FROM openjdk:8-jdk-alpine
 
 WORKDIR /app
-COPY build/libs/weewar-map-viewer.jar .
+COPY ./build/libs/weewar-map-viewer.jar .
 
 EXPOSE 8080
 
