@@ -1,1 +1,0 @@
-web: java -jar -Xms256m -Xmx256m -Xss512k -Dspring.profiles.active=prod build/libs/weewar-map-viewer.jar
