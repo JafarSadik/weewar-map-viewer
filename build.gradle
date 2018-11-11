@@ -49,12 +49,12 @@ dependencies {
 
 
 task convertMaps {
-    description = 'Converts original weewar maps from XML to JSON format'
-    group = 'weewar map viewer'
+    description = "Converts original weewar maps from XML to JSON format"
+    group = "weewar map viewer"
 
-    def targetMapsDir = '${project.rootDir}/src/main/resources/public/api/maps'
-    def script = '${project.rootDir}/bin/maps/convert-maps.groovy'
-    def args = ['--force', targetMapsDir] as String[]
+    def targetMapsDir = "${project.rootDir}/src/main/resources/public/api/maps"
+    def script = "${project.rootDir}/bin/maps/convert-maps.groovy"
+    def args = ["--force", targetMapsDir] as String[]
     def bindings = [force: true, targetMapsDir: targetMapsDir]
 
     doLast {
