@@ -11,4 +11,4 @@ data class Tile(
         @JsonProperty("direction") val direction: Direction?,
         @JsonProperty("unit") val unit: UnitType?,
         @JsonProperty("unitOwner") val unitOwner: Owner?
-
+)
