@@ -37,6 +37,6 @@ cache:
 notifications:
   email:
     recipients:
-    - dzafar.sadik@gmail.com
+    - weewar-map-viewer@jafarsadik.33mail.com
     on_success: change
     on_failure: always
