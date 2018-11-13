@@ -1,4 +1,4 @@
-FROM openjdk:8-alpine
+FROM openjdk:11-slim
 
 WORKDIR /app
 COPY ./build/libs/weewar-map-viewer.jar .
