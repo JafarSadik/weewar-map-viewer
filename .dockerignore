@@ -1,0 +1,17 @@
+.git
+.gradle
+.idea
+bin
+build
+env
+gradle
+out
+target
+node_modules
+
+README.md
+Dockerfile
+travis.yml
+heroku.yml
+gradlew
+*.iml

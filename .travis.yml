@@ -1,38 +1,15 @@
-# Travis CI configured to build java 8 project using gradle.
-# https://travis-ci.org/
-language: java
-jdk: oraclejdk8
-
+language: generic
 dist: trusty
 sudo: required
-
-services:
-  - docker
-
-before_install:
-- chmod +x gradlew
-
-install: []
-
-script: ./gradlew build
+services: docker
 
 deploy:
   provider: heroku
-  skip_cleanup: true
   app: weemaps
   api_key:
     secure: "AqCld/TwrhvTCkdvjkcF7dbJwhtkhJFDTLHO3WSB2wrAQh98JHA1aOARnd1Pb78WT4fSBJZH2VbQNvxDtfngzRXkOU7nOmOcKIk5OQ5oL0fyMCyVF96CmSLTJEA93n5eP/X2c/Hh9Gg6iVAtmNv/icFFZMA/bZo4PQybUcegMsXhKz3xLTibvZnx6suvG9zdP83HLhNaODymWi18jAKRwTrmkJ2nw7M26aEhSIndO0+7WIDJCbb2yB6JXb6AuBx6nFedD95QVqHuzKF7frQ+3PyJVjrgWVoJ4aU/193DTMO1BizvZHaka0vA+LzabTABFv+rQ58/wFkpGRXAWhD/3f+FVJrtZdDoGwhlNEhtmzpAbdhMZtOo9FRHCTj96y/yTJ8DbjRaUiw+m6xFQdf5PMqPRCCA5DFz47jZD/zihlb/iD1zW0IxeVEZ1UOObx+6K33e1yW3BcUlLRggVrQFB8++AMp1LX4FFOFETeFyHV/Bx2u6735aUfZUdM5Jc07C2+lvFeFX58BTuN+StjeNz319uyfSA5CM3bo9+c9h2ylI2WLNUGVETSTInwjUJNd+bxQyHJxEvQHWM2XRdHgmmy2mO8/KtDqjUt7cIdwcPHC0hgMC0osqZb+rZXLBjZrFTEzPIXWJ3lqZwDl6AKNb/F3ktCOtvMsVgVwt+F5jnWk="
   on:
     branch: master
-
-before_cache:
-- rm -f  ~/.gradle/caches/modules-2/modules-2.lock
-- rm -fr ~/.gradle/caches/*/plugin-resolution/
-
-cache:
-  directories:
-  - ~/.gradle/caches/
-  - ~/.gradle/wrapper/
 
 notifications:
   email:
