@@ -3,6 +3,8 @@
 # ---------------------------------
 server:
   port: ${PORT:8080}
+  tomcat:
+    max-threads: 50
   #Disable default (whitelabel) error page
   error:
     whitelabel:
