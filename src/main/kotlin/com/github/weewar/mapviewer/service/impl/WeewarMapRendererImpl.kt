@@ -5,15 +5,13 @@ import com.github.weewar.mapviewer.service.ImageRepository
 import com.github.weewar.mapviewer.service.WeewarMapRenderer
 import net.coobird.thumbnailator.Thumbnails
 import net.coobird.thumbnailator.resizers.configurations.*
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.awt.Color
 import java.awt.image.BufferedImage
 import java.io.IOException
 
 @Service
-class WeewarMapRendererImpl @Autowired
-constructor(private val images: ImageRepository) : WeewarMapRenderer {
+class WeewarMapRendererImpl(val images: ImageRepository) : WeewarMapRenderer {
 
     @Throws(ImageNotFoundException::class)
     override fun render(weewarMap: WeewarMap): BufferedImage {
