@@ -1,7 +1,4 @@
 language: generic
-dist: trusty
-sudo: required
-services: docker
 
 deploy:
   provider: heroku

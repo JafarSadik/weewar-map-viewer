@@ -1,10 +1,10 @@
 .git
 .gradle
+gradle
 .idea
 bin
 build
 env
-gradle
 out
 target
 node_modules
@@ -14,4 +14,5 @@ Dockerfile
 travis.yml
 heroku.yml
 gradlew
+gradlew.bat
 *.iml
