@@ -2,11 +2,12 @@
 .gradle
 gradle
 .idea
-bin
 build
 env
 out
 target
+maps
+readme
 node_modules
 
 README.md

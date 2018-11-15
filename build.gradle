@@ -48,7 +48,7 @@ task convertMaps {
     group = "weewar map viewer"
 
     def targetMapsDir = "${project.rootDir}/src/main/resources/public/api/maps"
-    def script = "${project.rootDir}/bin/maps/convert-maps.groovy"
+    def script = "${project.rootDir}/maps/convert-maps.groovy"
     def args = ["--force", targetMapsDir] as String[]
     def bindings = [force: true, targetMapsDir: targetMapsDir]
 
