@@ -9,6 +9,7 @@ target
 maps
 readme
 node_modules
+dev
 
 README.md
 Dockerfile

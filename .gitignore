@@ -13,4 +13,8 @@ gradle
 gradlew
 gradlew.bat
 
+.vagrant
 
+logs
+*.log
+hs_err_pid*

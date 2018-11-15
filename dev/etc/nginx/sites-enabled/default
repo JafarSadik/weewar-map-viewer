@@ -1,0 +1,12 @@
+server {
+    server_name weemaps;
+
+    listen 80 default_server;
+    listen [::]:80 default_server ipv6only=on;
+
+    root /usr/share/nginx/html;
+
+    location / {
+        proxy_pass http://10.0.2.2:8080/;
+    }
+}
