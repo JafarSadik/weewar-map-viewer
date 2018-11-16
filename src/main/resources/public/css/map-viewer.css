@@ -1,3 +1,16 @@
+@import 'https://fonts.googleapis.com/css?family=Roboto:300,400,500';
+
+body {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    color: #555;
+    line-height: 1.5;
+    padding: 1em 1em;
+}
+
+h1, h2, h3, h4 strong {
+    color: #333;
+}
+
 div.map-box {
     width: 180px;
     height: 140px;
@@ -8,6 +21,7 @@ div.map-box {
     border: 1px solid #EEEEEE;
     border-radius: 5px;
     margin: 2px 2px 2px 2px;
+    cursor: pointer;
 }
 
 img.ribbon {
@@ -15,4 +29,25 @@ img.ribbon {
     top: 0;
     right: 0;
     border: 0;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    text-align: center;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #888;
+    display: inline-flex;
 }

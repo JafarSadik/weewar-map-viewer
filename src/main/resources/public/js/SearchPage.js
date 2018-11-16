@@ -6,6 +6,7 @@ var MapViewer = MapViewer || {};
     $(function () {
         loadInitialMaps();
         pageScrolledToBottom(() => loadMoreMaps(firstMapIndex, pageSize));
+        initDialogBox()
     });
 
     function loadInitialMaps() {
@@ -25,6 +26,25 @@ var MapViewer = MapViewer || {};
                 callback(event);
             }
         };
+    }
+
+    function initDialogBox() {
+        let $modal = $('.modal');
+
+        $("#map-box-container").on("click", ".map-box", function () {
+            let active = $(this);
+            let mapId = $(active).attr('id');
+            let $modalContent = $modal.find('.modal-content');
+
+            $modalContent.html(`
+                <a href="/map/${mapId}" target="_blank">
+                    <img src="/images/maps/${mapId}.png"/>
+                </a>
+            `);
+            $modal.show();
+        });
+
+        $modal.click(() => $modal.hide())
     }
 
     function getMaps(first, count, callback) {
