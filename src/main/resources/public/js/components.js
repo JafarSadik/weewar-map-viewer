@@ -1,5 +1,5 @@
 var MapViewer = MapViewer || {};
-MapViewer.Elements = (function () {
+MapViewer.Components = (function () {
     return {
         mapBox: (map) =>
             `<div id="${map.id}" class="map-box">

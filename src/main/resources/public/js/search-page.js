@@ -15,7 +15,7 @@ var MapViewer = MapViewer || {};
 
     function loadMoreMaps(_firstMapIndex, _pageSize) {
         getMaps(_firstMapIndex, _pageSize, (maps) => {
-            maps.forEach(map => container.append(MapViewer.Elements.mapBox(map)));
+            maps.forEach(map => container.append(MapViewer.Components.mapBox(map)));
             firstMapIndex = _firstMapIndex + _pageSize
         });
     }
