@@ -8,24 +8,23 @@
 </head>
 
 <body>
+    <div id="main-container">
+        <div id="map-headline-container">
+            <span id="map-name" th:text="${map.mapName}">Awesome map</span>
+            <span th:text="'(rev ' + ${map.revision} + ')'">(revision 1)</span>
+            by <span th:text="${map.creator}">Jafar</span>
+        </div>
 
-<div id="main-container">
-    <div id="map-headline-container">
-        <span id="map-name" th:text="${map.mapName}">Awesome map</span>
-        <span th:text="'(rev ' + ${map.revision} + ')'">(revision 1)</span>
-        by <span th:text="${map.creator}">Jafar</span>
-    </div>
+        <div id="map-details-container">
+            <span th:text="${map.players}">2</span> players |
+            Income: <span th:text="${map.income}">200</span> |
+            Start credits: <span th:text="${map.startCredits}">100</span> |
+            Map size: <span th:text="${map.width} + ' x ' + ${map.height}">25 x 20</span>
+        </div>
 
-    <div id="map-details-container">
-        <span th:text="${map.players}">2</span> players |
-        Income: <span th:text="${map.income}">200</span> |
-        Start credits: <span th:text="${map.startCredits}">100</span> |
-        Map size: <span th:text="${map.width} + ' x ' + ${map.height}">25 x 20</span>
+        <div id="map-container">
+            <img src="#" th:src="'/images/maps/' + ${map.id} + '.png'"/>
+        </div>
     </div>
-
-    <div id="map-container">
-        <img src="#" th:src="'/images/maps/' + ${map.id} + '.png'"/>
-    </div>
-</div>
 </body>
 </html>
