@@ -10,7 +10,7 @@ COPY --from=build_stage /home/gradle/project/build/libs/weewar-map-viewer.jar .
 
 EXPOSE 8080
 
-CMD java -jar -server -Xmx200m -Xss256k -XX:+UseCompressedOops -XX:CICompilerCount=2 \
+CMD java -jar -server -Xmx250m -Xss256k -XX:+UseCompressedOops -XX:CICompilerCount=2 \
  -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC \
  -Dfile.encoding=UTF-8 -Dserver.port=$PORT  \
  -Dspring.profiles.active=$PROFILE weewar-map-viewer.jar
