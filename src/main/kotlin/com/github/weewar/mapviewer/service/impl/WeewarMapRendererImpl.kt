@@ -18,26 +18,30 @@ class WeewarMapRendererImpl(val images: ImageRepository) : WeewarMapRenderer {
         // create empty image of a proper size
         val (mapWidth, mapHeight) = weewarMap.sizeInPixels()
         val weewarMapImage = BufferedImage(mapWidth, mapHeight, BufferedImage.TYPE_INT_ARGB)
-        val graph = weewarMapImage.graphics
 
-        // fill with a transparent background
-        graph.color = Color(0, 0, 0, 0)
-        graph.fillRect(0, 0, mapWidth, mapHeight)
+        with(weewarMapImage.createGraphics()) {
+            // fill with a transparent background
+            color = Color(0, 0, 0, 0)
+            fillRect(0, 0, mapWidth, mapHeight)
 
-        // render terrain, buildings and units
-        for (tile in weewarMap.terrain) {
-            val (x, y) = weewarMap.hexToPixel(tile.x, tile.y)
+            // render terrain, buildings and units
+            for (tile in weewarMap.terrain) {
+                val (x, y) = weewarMap.hexToPixel(tile.x, tile.y)
 
-            // render terrain and buildings
-            val terrain = images.getTerrain(tile.type, tile.startFaction, tile.direction)
-            graph.drawImage(terrain, x, y, null)
+                // render terrain and buildings
+                val terrain = images.getTerrain(tile.type, tile.startFaction, tile.direction)
+                drawImage(terrain, x, y, null)
 
-            // render units
-            if (tile.unit != null && tile.unitOwner != null) {
-                val unit = images.getUnit(tile.unit, tile.unitOwner)
-                graph.drawImage(unit, x, y, null)
+                // render units
+                if (tile.unit != null && tile.unitOwner != null) {
+                    val unit = images.getUnit(tile.unit, tile.unitOwner)
+                    drawImage(unit, x, y, null)
+                }
             }
+
+            dispose()
         }
+
         return weewarMapImage
     }
 
