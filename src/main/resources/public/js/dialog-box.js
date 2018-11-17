@@ -7,8 +7,7 @@
 
     function showModalOnClick() {
         $("#map-box-container").on("click", ".map-box", function () {
-            const active = $(this);
-            const mapId = $(active).attr('id');
+            const mapId = $(this).attr('id');
 
             Promise.all([preloadImage(mapImagePath(mapId)), getMapInfo(mapId)])
                 .then(([image, mapInfo]) => {
