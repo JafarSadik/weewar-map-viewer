@@ -1,6 +1,7 @@
 var MapViewer = MapViewer || {};
 (function () {
     let container = new MapViewer.MapContainer();
+    let components = MapViewer.Components;
     let firstMapIndex = 0, pageSize = 100;
 
     $(function () {
@@ -13,11 +14,13 @@ var MapViewer = MapViewer || {};
         loadMoreMaps(0, maxItemsOnPage());
     }
 
-    function loadMoreMaps(_firstMapIndex, _pageSize) {
-        getMaps(_firstMapIndex, _pageSize, (maps) => {
-            maps.forEach(map => container.append(MapViewer.Components.mapBox(map)));
-            firstMapIndex = _firstMapIndex + _pageSize
-        });
+    function loadMoreMaps(first, count) {
+        getMaps(first, count).then((maps) => {
+            for (let map of maps) {
+                container.append(components.mapBox(map));
+            }
+            firstMapIndex = first + count
+        })
     }
 
     function pageScrolledToBottom(callback) {
@@ -34,21 +37,35 @@ var MapViewer = MapViewer || {};
         $("#map-box-container").on("click", ".map-box", function () {
             let active = $(this);
             let mapId = $(active).attr('id');
-            let $modalContent = $modal.find('.modal-content');
-
-            $modalContent.html(`
-                <a href="/map/${mapId}" target="_blank">
-                    <img src="/images/maps/${mapId}.png"/>
-                </a>
-            `);
-            $modal.show();
+            getMapInfo(mapId).then((map) => {
+                $modal.html(`                   
+                    <div class="modal-content">
+                        <div class="title">
+                            <div>${map.name}, version ${map.revision} by ${map.creator || 'unknown'}</div>
+                            <div>${map.players} players | Income: ${map.perBaseCredits} | Start credits: ${map.initialCredits} | Map size: ${map.width}x${map.height}</div>
+                        </div>
+                        <a href="/map/${mapId}" target="_blank">
+                            <img src="/images/maps/${mapId}.png"/>
+                        </a>
+                    </div>
+                `);
+                $modal.show();
+            });
         });
 
         $modal.click(() => $modal.hide())
     }
 
-    function getMaps(first, count, callback) {
-        $.get(`/api/maps?first=${first}&count=${count}`, callback);
+    function getMaps(first, count) {
+        return new Promise((resolve) =>
+            $.get(`/api/maps?first=${first}&count=${count}`, (maps) => resolve(maps))
+        );
+    }
+
+    function getMapInfo(mapId) {
+        return new Promise((resolve) =>
+            $.get(`/api/maps/${mapId}`, (mapInfo) => resolve(JSON.parse(mapInfo)))
+        );
     }
 
     function maxItemsOnPage() {

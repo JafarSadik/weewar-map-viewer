@@ -35,19 +35,27 @@ img.ribbon {
     display: none;
     position: fixed;
     text-align: center;
+    padding-top: 20px;
     z-index: 1;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
     background-color: #fefefe;
-    margin-top: 20px;
-    padding: 10px;
-    border: 1px solid #888;
+    border: 2px solid gray;
     display: inline-flex;
+}
+
+.modal-content > .title {
+    position: absolute;
+    padding: 2px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fefefe;
+    font-size: small;
+    text-align: left
 }
