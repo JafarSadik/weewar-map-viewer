@@ -49,10 +49,12 @@ class SearchPageControllerTest {
     }
 
     @Test
-    fun `expect empty array when no maps defined`() {
-        mockMvc.perform(get("/api/maps")
+    fun `expect empty list when no maps defined`() {
+        val response = mockMvc.perform(get("/api/maps")
                 .param("first", "0")
                 .param("count", "5"))
-                .andExpect(content().string("[]"))
+                .toObject(List::class.java)
+
+        assertThat(response).isEmpty()
     }
 }
