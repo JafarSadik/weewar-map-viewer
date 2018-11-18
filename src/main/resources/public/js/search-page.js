@@ -35,8 +35,8 @@ var MapViewer = MapViewer || {};
 
     function maxItemsOnPage() {
         let mapBoxWidth = 180, mapBoxHeight = 150;
-        let maxColumns = window.innerWidth / mapBoxWidth;
-        let maxRows = window.innerHeight / mapBoxHeight;
-        return Math.round(maxColumns * maxRows);
+        let maxColumns = Math.floor(window.innerWidth / mapBoxWidth);
+        let maxRows = Math.floor(window.innerHeight / mapBoxHeight);
+        return Math.max(maxColumns * maxRows, 50);
     }
 })();
