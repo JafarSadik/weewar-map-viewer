@@ -5,7 +5,7 @@ import org.junit.Test
 
 class UnitImageKeyTest {
     @Test
-    fun verifyEqualsContract() {
+    fun `verify equals contract`() {
         EqualsVerifier.forClass(UnitImageKey::class.java).verify()
     }
 }

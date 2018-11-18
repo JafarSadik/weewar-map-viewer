@@ -11,13 +11,13 @@ import java.io.IOException
 import java.net.URL
 
 @Service
-class WeewarMapLoaderImpl : WeewarMapLoader {
+class WeewarMapLoaderImpl(val classPath: ClassPath) : WeewarMapLoader {
     private val jsonMapper: ObjectMapper by lazy { configObjectMapper() }
 
     @Throws(MapParseException::class)
     override fun load(mapId: Int): WeewarMap {
         val path = mapsDir + mapId
-        val mapURL = ClassPath.resource(path)
+        val mapURL = classPath.resource(path)
         return load(mapURL)
     }
 
@@ -31,7 +31,7 @@ class WeewarMapLoaderImpl : WeewarMapLoader {
 
     @Throws(MapParseException::class)
     override fun loadAll(): List<WeewarMap> {
-        return ClassPath.resources("$mapsDir*").map { load(it) }
+        return classPath.resources(mapsDir).map { load(it) }
     }
 
     private fun configObjectMapper() = ObjectMapper().registerModule(KotlinModule())

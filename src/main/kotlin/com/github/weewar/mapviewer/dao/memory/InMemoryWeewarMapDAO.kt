@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap
 import java.util.stream.Collectors.toMap
 
 @Repository
-class InMemoryWeewarMapDAO(private val weewarMapLoader: WeewarMapLoader) : WeewarMapDAO {
+class InMemoryWeewarMapDAO(val weewarMapLoader: WeewarMapLoader, val classPath: ClassPath) : WeewarMapDAO {
 
     private val logger = LoggerFactory.getLogger(InMemoryWeewarMapDAO::class.java)
     private val weewarMapHeaders = ConcurrentHashMap<Int, MapHeader>(50, 0.75f, 1)
@@ -34,7 +34,7 @@ class InMemoryWeewarMapDAO(private val weewarMapLoader: WeewarMapLoader) : Weewa
                     .take(searchCriteria.pageSize)
 
     fun populate() = weewarMapHeaders.putAll(
-            ClassPath.resources("$mapsDir*").parallelStream()
+            classPath.resources(mapsDir).parallelStream()
                     .map { url -> weewarMapLoader.load(url).header }
                     .collect(toMap({ it.id }, { it }))
     )

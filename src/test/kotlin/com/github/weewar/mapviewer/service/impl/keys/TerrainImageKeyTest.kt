@@ -5,7 +5,7 @@ import org.junit.Test
 
 class TerrainImageKeyTest {
     @Test
-    fun verifyEqualsContract() {
+    fun `verify equals contract`() {
         EqualsVerifier.forClass(TerrainImageKey::class.java).verify()
     }
 }
