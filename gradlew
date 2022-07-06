@@ -18,7 +18,7 @@ while [ -h "$PRG" ] ; do
     else
         PRG=`dirname "$PRG"`"/$link"
     fi
-doneĽ
+done;
 SAVED="`pwd`"
 cd "`dirname \"$PRG\"`/" >/dev/null
 APP_HOME="`pwd -P`"
