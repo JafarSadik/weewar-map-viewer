@@ -6,11 +6,11 @@ import com.github.weewar.mapviewer.model.mapsDir
 import com.github.weewar.mapviewer.service.impl.WeewarMapLoaderImpl
 import com.github.weewar.mapviewer.utils.ClassPath
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Assert.assertTrue
-import org.junit.Before
-import org.junit.Test
-import org.mockito.Mockito.`when`
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import org.mockito.Mockito.mock
+import org.mockito.Mockito.`when`
 import java.net.URL
 
 class InMemoryWeewarMapDAOTest {
@@ -18,7 +18,7 @@ class InMemoryWeewarMapDAOTest {
     val weewarMapLoader = WeewarMapLoaderImpl(classPath)
     val weewarMapDao = InMemoryWeewarMapDAO(weewarMapLoader, classPath)
 
-    @Before
+    @BeforeEach
     fun initClassPathAndPreloadMaps() {
         val maps = listOf(url("/public/api/maps/1"), url("/public/api/maps/2"))
         `when`(classPath.resources(mapsDir)).thenReturn(maps)

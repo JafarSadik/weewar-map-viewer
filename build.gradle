@@ -35,9 +35,14 @@ dependencies {
     testImplementation(
             'org.springframework.boot:spring-boot-starter-test',
             'nl.jqno.equalsverifier:equalsverifier:3.15.1',
-            'org.mockito:mockito-core:2.18+',
+            'org.mockito:mockito-core:4.8.1',
             'org.assertj:assertj-core:3.23.1',
-            'junit:junit:4.13.1'
+            'org.junit.jupiter:junit-jupiter-api:5.8.2',
+            'org.objenesis:objenesis:3.3'
+    )
+
+    testRuntimeOnly(
+            'org.junit.jupiter:junit-jupiter-engine:5.8.1'
     )
 }
 
@@ -53,5 +58,18 @@ tasks.register('convertMaps') {
     doLast {
         def shell = new GroovyShell(new Binding(bindings))
         shell.run(new File(script), args)
+    }
+}
+
+test {
+    // Enable JUnit 5 (Gradle 4.6+).
+    useJUnitPlatform()
+
+    // Always run tests, even when nothing changed.
+    dependsOn 'cleanTest'
+
+    // Show test results.
+    testLogging {
+        events "passed", "skipped", "failed"
     }
 }
