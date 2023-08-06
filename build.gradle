@@ -26,10 +26,9 @@ dependencies {
     implementation(
             'org.springframework.boot:spring-boot-starter-web',
             'org.springframework.boot:spring-boot-starter-thymeleaf',
-            'org.jetbrains.kotlin:kotlin-reflect',
-            'net.coobird:thumbnailator:0.4.8',
+            'net.coobird:thumbnailator:0.4.20',
             'com.fasterxml.jackson.module:jackson-module-kotlin:2.9.7',
-            'org.yaml:snakeyaml:1.33'
+            'org.yaml:snakeyaml:2.1'
     )
 
     testImplementation(
@@ -46,6 +45,7 @@ dependencies {
     )
 }
 
+// Converts all weewar maps from their original XML format to a more convenient JSON format.
 tasks.register('convertMaps') {
     description = "Converts original weewar maps from XML to JSON format"
     group = "weewar map viewer"

@@ -1,16 +1,22 @@
 package com.github.weewar.mapviewer.startup
 
 import org.slf4j.LoggerFactory.getLogger
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.ExitCodeGenerator
+import org.springframework.boot.SpringApplication
+import org.springframework.context.ApplicationContext
 import org.springframework.core.env.Environment
 import org.springframework.stereotype.Component
 import javax.annotation.PostConstruct
-import kotlin.system.exitProcess
 
 
 @Component
 class EnforceKnownProfiles(env: Environment) {
     private val logger = getLogger(EnforceKnownProfiles::class.java)
     private val profiles: List<String> = listOf(*env.activeProfiles)
+
+    @Autowired
+    private lateinit var ctx: ApplicationContext
 
     @PostConstruct
     fun onStartup() {
@@ -26,7 +32,7 @@ class EnforceKnownProfiles(env: Environment) {
     private fun expect(condition: Boolean, errorMessage: String) {
         if (!condition) {
             logger.error(errorMessage)
-            exitProcess(1)
+            SpringApplication.exit(ctx, ExitCodeGenerator { -1 })
         }
     }
 }
