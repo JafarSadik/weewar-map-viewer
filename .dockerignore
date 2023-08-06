@@ -1,6 +1,5 @@
 .git
 .gradle
-gradle
 .idea
 build
 env
@@ -9,11 +8,4 @@ target
 maps
 readme
 node_modules
-
-README.md
-Dockerfile
-travis.yml
-heroku.yml
-gradlew
-gradlew.bat
 *.iml

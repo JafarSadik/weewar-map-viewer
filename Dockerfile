@@ -1,16 +1,15 @@
-FROM gradle:4.10-jdk11-slim as build_stage
-COPY --chown=gradle:gradle . /home/gradle/project
-WORKDIR /home/gradle/project
-RUN gradle build
+FROM eclipse-temurin:17.0.8_7-jdk-focal as build_stage
+COPY . /project
+WORKDIR /project
+RUN ./gradlew build
 
-FROM openjdk:11-slim
+FROM eclipse-temurin:17-jre-focal
 WORKDIR /app
 ENV PROFILE=prod
-COPY --from=build_stage /home/gradle/project/build/libs/weewar-map-viewer.jar .
+COPY --from=build_stage /project/build/libs/weewar-map-viewer.jar .
 
 EXPOSE 8080
 
-CMD java -jar -server -Xmx250m -Xss256k -XX:+UseCompressedOops -XX:CICompilerCount=2 \
- -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC \
- -Dfile.encoding=UTF-8 -Dserver.port=$PORT  \
- -Dspring.profiles.active=$PROFILE weewar-map-viewer.jar
+ENTRYPOINT ["java","-jar", "-Dspring.profiles.active=${PROFILE}",\
+            "-server", "-Xmx250m", "-Dfile.encoding=UTF-8",\
+            "weewar-map-viewer.jar"]
