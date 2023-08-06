@@ -11,5 +11,5 @@ COPY --from=build_stage /project/build/libs/weewar-map-viewer.jar .
 EXPOSE 8080
 
 ENTRYPOINT ["java","-jar", "-Dspring.profiles.active=${PROFILE}",\
-            "-server", "-Xmx250m", "-Dfile.encoding=UTF-8",\
+            "-server", "-Xmx256m", "-Dfile.encoding=UTF-8",\
             "weewar-map-viewer.jar"]
