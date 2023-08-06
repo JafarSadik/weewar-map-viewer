@@ -4,12 +4,13 @@ import org.slf4j.LoggerFactory.getLogger
 import org.springframework.core.env.Environment
 import org.springframework.stereotype.Component
 import javax.annotation.PostConstruct
+import kotlin.system.exitProcess
 
 
 @Component
 class EnforceKnownProfiles(env: Environment) {
     private val logger = getLogger(EnforceKnownProfiles::class.java)
-    private val profiles: List<String> = listOf(*env.activeProfiles);
+    private val profiles: List<String> = listOf(*env.activeProfiles)
 
     @PostConstruct
     fun onStartup() {
@@ -25,7 +26,7 @@ class EnforceKnownProfiles(env: Environment) {
     private fun expect(condition: Boolean, errorMessage: String) {
         if (!condition) {
             logger.error(errorMessage)
-            System.exit(1)
+            exitProcess(1)
         }
     }
 }

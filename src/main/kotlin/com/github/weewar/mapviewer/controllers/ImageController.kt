@@ -14,14 +14,14 @@ import java.util.concurrent.TimeUnit
 @Controller
 class ImageController(private val weewarMapRenderer: WeewarMapRenderer, private val weewarMapDAO: WeewarMapDAO) {
 
-    @GetMapping("/images/maps/{map_id}", produces = [MediaType.IMAGE_PNG_VALUE])
+    @GetMapping("/images/maps/{map_id}.png", produces = [MediaType.IMAGE_PNG_VALUE])
     fun renderWeewarMap(@PathVariable("map_id") mapId: Int): ResponseEntity<ByteArray> {
         return weewarMapDAO.findMapById(mapId)
                 .map { httpOk(image(it)) }
                 .orElse(httpNotFoundError())
     }
 
-    @GetMapping("/images/maps/thumbnails/{map_id}")
+    @GetMapping("/images/maps/thumbnails/{map_id}.png")
     fun renderMapThumbnail(@PathVariable("map_id") mapId: Int): ResponseEntity<ByteArray> {
         return weewarMapDAO.findMapById(mapId)
                 .map { httpOk(thumbnail(it)) }

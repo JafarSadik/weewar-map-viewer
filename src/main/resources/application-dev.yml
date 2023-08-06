@@ -7,4 +7,5 @@ spring:
     cache: false
 
 logging:
-  level: debug
+  level:
+    root: debug

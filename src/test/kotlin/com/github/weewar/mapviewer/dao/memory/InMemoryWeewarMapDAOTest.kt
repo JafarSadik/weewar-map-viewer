@@ -33,7 +33,7 @@ class InMemoryWeewarMapDAOTest {
         assertTrue(weewarMap.isPresent)
 
         with(weewarMap.get()) {
-            assertThat(header).isEqualToComparingFieldByField(
+            assertThat(header).usingRecursiveComparison().isEqualTo(
                     MapHeader(id = 1, mapName = "Three ways", revision = 0, creator = "bert", players = 3,
                             income = 200, startCredits = 100, width = 17, height = 20)
             )
@@ -49,7 +49,7 @@ class InMemoryWeewarMapDAOTest {
         val weewarMapHeader = weewarMapDao.findMapHeaderById(2)
         assertTrue(weewarMapHeader.isPresent)
 
-        assertThat(weewarMapHeader.get()).isEqualToComparingFieldByField(
+        assertThat(weewarMapHeader.get()).usingRecursiveComparison().isEqualTo(
                 MapHeader(id = 2, mapName = "Botanic Troubles", revision = 0, creator = "bert", players = 2,
                         income = 100, startCredits = 250, width = 20, height = 19)
         )

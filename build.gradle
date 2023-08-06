@@ -1,50 +1,47 @@
-buildscript {
-    repositories { mavenCentral() }
-    dependencies {
-        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.5.6.RELEASE'
-    }
-}
-
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.3.0'
+    id 'org.springframework.boot' version '2.7.14'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id 'org.jetbrains.kotlin.jvm' version '1.9.0'
+    id 'com.adarshr.test-logger' version '3.2.0'
 }
 
-apply plugin: 'java'
-apply plugin: 'kotlin'
-apply plugin: 'org.springframework.boot'
+java {
+    sourceCompatibility = '17'
+    targetCompatibility = '17'
+}
 
+kotlin {
+    jvmToolchain(17)
+}
+
+repositories {
+    mavenCentral()
+}
 
 springBoot {
     mainClass = 'com.github.weewar.mapviewer.WeewarMapViewerKt'
 }
 
-repositories {
-    jcenter()
-    mavenCentral()
-}
-
 dependencies {
-    compile(
-            'org.springframework.boot:spring-boot-starter-web:1.5.6.RELEASE',
-            'org.springframework.boot:spring-boot-starter-thymeleaf:1.5.6.RELEASE',
-            'com.fasterxml.jackson.module:jackson-module-kotlin:2.9.7',
-            'org.jetbrains.kotlin:kotlin-stdlib-jdk8',
-            'org.jetbrains.kotlin:kotlin-reflect:1.3.0',
+    implementation(
+            'org.springframework.boot:spring-boot-starter-web',
+            'org.springframework.boot:spring-boot-starter-thymeleaf',
+            'org.jetbrains.kotlin:kotlin-reflect',
             'net.coobird:thumbnailator:0.4.8',
-            'com.github.mrcritical:ironcache:2.0.0'
+            'com.fasterxml.jackson.module:jackson-module-kotlin:2.9.7',
+            'org.yaml:snakeyaml:1.33'
     )
 
-    testCompile(
-            'junit:junit:4.12',
-            'org.mockito:mockito-core:2.18+',
-            'nl.jqno.equalsverifier:equalsverifier:2.3.3',
+    testImplementation(
             'org.springframework.boot:spring-boot-starter-test',
-            'org.assertj:assertj-core:3.11.0'
+            'nl.jqno.equalsverifier:equalsverifier:3.15.1',
+            'org.mockito:mockito-core:2.18+',
+            'org.assertj:assertj-core:3.23.1',
+            'junit:junit:4.13.1'
     )
 }
 
-
-task convertMaps {
+tasks.register('convertMaps') {
     description = "Converts original weewar maps from XML to JSON format"
     group = "weewar map viewer"
 
@@ -56,21 +53,5 @@ task convertMaps {
     doLast {
         def shell = new GroovyShell(new Binding(bindings))
         shell.run(new File(script), args)
-    }
-}
-
-compileJava {
-    sourceCompatibility = '1.8'
-    targetCompatibility = '1.8'
-}
-
-compileKotlin {
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
-}
-compileTestKotlin {
-    kotlinOptions {
-        jvmTarget = '1.8'
     }
 }

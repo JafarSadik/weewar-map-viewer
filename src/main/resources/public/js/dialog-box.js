@@ -32,7 +32,7 @@
                 <div>${map.players} players | Income: ${map.perBaseCredits} | Start credits: ${map.initialCredits} | Map size: ${map.width}x${map.height}</div>
             </div>
             <a href="/map/${map.id}" target="_blank">
-                <img src="${mapImagePath(map.id)}"/>
+                <img src="${mapImagePath(map.id)}" alt="${map.id}"/>
             </a>
          </div>`;
 

@@ -6,4 +6,5 @@ spring:
     cache: true
 
 logging:
-  level: info
+  level:
+    root: info

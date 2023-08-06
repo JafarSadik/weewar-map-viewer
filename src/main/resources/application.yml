@@ -3,8 +3,6 @@
 # ---------------------------------
 server:
   port: ${PORT:8080}
-  tomcat:
-    max-threads: 50
   #Disable default (whitelabel) error page
   error:
     whitelabel:
@@ -12,10 +10,6 @@ server:
     include-stacktrace: never
 
 spring:
-  mvc:
-    # Disable default spring favicon
-    favicon:
-      enabled: false
   # Disable spring banner
-  main:
+   main:
     banner-mode: 'off'
