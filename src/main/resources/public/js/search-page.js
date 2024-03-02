@@ -21,7 +21,7 @@ var MapViewer = MapViewer || {};
 
     function whenPageScrolledToBottom(callback) {
         window.onscroll = function (event) {
-            if ((window.innerHeight + window.scrollY) >= document.documentElement.offsetHeight) {
+            if (1.1 * (window.innerHeight + window.scrollY) >= document.documentElement.offsetHeight) {
                 callback(event);
             }
         };
